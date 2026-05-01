@@ -528,6 +528,7 @@ GameObject:
   - component: {fileID: 6615825756452809486}
   - component: {fileID: 471597121255793947}
   - component: {fileID: 1411110720214444894}
+  - component: {fileID: 5700032847415239911}
   - component: {fileID: 6722736412762474085}
   m_Layer: 0
   m_Name: Base_Character
@@ -674,6 +675,51 @@ MonoBehaviour:
   verticalInputAxis: Vertical
   jumpKey: 32
   useRawInput: 1
+--- !u!114 &5700032847415239911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221672173501980139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2f41a0c55b4266936069881eb5e91d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ledgeLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireLedgeMarker: 0
+  forwardReference: {fileID: 1144268862617776782}
+  maxUpwardSpeedToGrab: 2
+  regrabCooldown: 0.2
+  topCheckHeight: 1.8
+  topCheckForwardOffset: 0.45
+  topCheckRadius: 0.18
+  topCheckDistance: 0.75
+  topSurfaceMaxAngle: 25
+  frontCheckHeight: 1.25
+  frontCheckRadius: 0.18
+  frontCheckDistance: 0.6
+  wallFacingMaxAngle: 60
+  wallVerticalAngleTolerance: 20
+  minimumLedgeHeight: 0.35
+  maxSnapDistance: 1.35
+  hangDistanceFromWall: 0.45
+  hangVerticalOffset: 1.2
+  hangSnapSpeed: 14
+  faceWallTurnSpeed: 1080
+  ledgeMoveSpeed: 2.5
+  horizontalInputDeadZone: 0.15
+  sameWallNormalTolerance: 25
+  hangPositionSnapDistance: 0.02
+  dropKey: 304
+  jumpInputBufferDuration: 0.15
+  dropAwaySpeed: 1.5
+  jumpOffUpwardSpeed: 7
+  jumpOffAwaySpeed: 2.5
+  drawDebug: 0
 --- !u!114 &6722736412762474085
 MonoBehaviour:
   m_ObjectHideFlags: 0

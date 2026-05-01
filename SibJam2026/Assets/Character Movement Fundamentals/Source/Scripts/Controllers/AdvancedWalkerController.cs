@@ -110,6 +110,11 @@ namespace CMF
 			HandleJumpKeyInput();
 		}
 
+		void OnDisable()
+		{
+			ResetJumpInputState();
+		}
+
         //Handle jump booleans for later use in FixedUpdate;
         void HandleJumpKeyInput()
         {
@@ -313,6 +318,15 @@ namespace CMF
 				return false;
 
 			return characterInput.IsJumpKeyPressed();
+		}
+
+		public void ResetJumpInputState()
+		{
+			jumpInputIsLocked = false;
+			jumpKeyWasPressed = false;
+			jumpKeyWasLetGo = false;
+			jumpKeyIsPressed = IsJumpKeyPressed();
+			lastJumpButtonPressedTime = Mathf.NegativeInfinity;
 		}
 
 		//Determine current controller state based on current momentum and whether the controller is grounded (or not);
