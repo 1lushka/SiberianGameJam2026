@@ -60,6 +60,7 @@ namespace CMF
 		Vector3 savedMovementVelocity = Vector3.zero;
 		Vector3 currentMovementVelocity = Vector3.zero;
 		bool acceleratingFromRest = false;
+		SlipperySurface currentSlipperySurface = null;
 
 		//Amount of downward gravity;
 		public float gravity = 30f;
@@ -150,6 +151,8 @@ namespace CMF
 			if(currentControllerState == ControllerState.Grounded)
 				lastTimeGrounded = Time.time;
 
+			UpdateGroundSurfaceState();
+
 			UpdateMovementVelocity();
 
 			//Apply friction and gravity to 'momentum';
@@ -182,7 +185,9 @@ namespace CMF
 			savedVelocity = _velocity;
 		
 			//Save controller movement velocity;
-			if(currentControllerState == ControllerState.Grounded)
+			if(IsOnSlipperySurface())
+				savedMovementVelocity = VectorMath.RemoveDotVector(_velocity, tr.up);
+			else if(currentControllerState == ControllerState.Grounded)
 				savedMovementVelocity = currentMovementVelocity;
 			else
 				savedMovementVelocity = CalculateMovementVelocity();
@@ -243,6 +248,13 @@ namespace CMF
 		{
 			Vector3 _targetMovementVelocity = CalculateMovementVelocity();
 
+			if(IsOnSlipperySurface())
+			{
+				currentMovementVelocity = Vector3.zero;
+				acceleratingFromRest = false;
+				return;
+			}
+
 			if(currentControllerState == ControllerState.Grounded)
 			{
 				if(_targetMovementVelocity.sqrMagnitude <= 0f)
@@ -294,6 +306,43 @@ namespace CMF
 			{
 				acceleratingFromRest = false;
 			}
+		}
+
+		void UpdateGroundSurfaceState()
+		{
+			SlipperySurface _previousSlipperySurface = currentSlipperySurface;
+
+			if(currentControllerState != ControllerState.Grounded && currentControllerState != ControllerState.Sliding)
+			{
+				currentSlipperySurface = null;
+				return;
+			}
+
+			Collider _groundCollider = mover.GetGroundCollider();
+			if(_groundCollider == null)
+			{
+				currentSlipperySurface = null;
+				return;
+			}
+
+			currentSlipperySurface = _groundCollider.GetComponentInParent<SlipperySurface>();
+
+			if(_previousSlipperySurface == null && currentSlipperySurface != null && currentControllerState == ControllerState.Grounded)
+			{
+				if(currentMovementVelocity.sqrMagnitude > 0.0001f)
+					AddMomentum(currentMovementVelocity);
+
+				currentMovementVelocity = Vector3.zero;
+				acceleratingFromRest = false;
+			}
+		}
+
+		bool IsOnSlipperySurface()
+		{
+			if(currentSlipperySurface == null)
+				return false;
+
+			return (currentControllerState == ControllerState.Grounded || currentControllerState == ControllerState.Sliding);
 		}
 
 		bool IsStartingFromRest()
@@ -493,11 +542,13 @@ namespace CMF
         //Apply friction to both vertical and horizontal momentum based on 'friction' and 'gravity';
         //Handle movement in the air;
         //Handle sliding down steep slopes;
-        void HandleMomentum()
+		void HandleMomentum()
 		{
 			//If local momentum is used, transform momentum into world coordinates first;
 			if(useLocalMomentum)
 				momentum = tr.localToWorldMatrix * momentum;
+
+			bool _isOnSlipperySurface = IsOnSlipperySurface();
 
 			Vector3 _verticalMomentum = Vector3.zero;
 			Vector3 _horizontalMomentum = Vector3.zero;
@@ -556,9 +607,32 @@ namespace CMF
 				_horizontalMomentum += _slopeMovementVelocity * Time.fixedDeltaTime;
 			}
 
+			if(_isOnSlipperySurface)
+			{
+				Vector3 _groundNormal = mover.GetGroundNormal();
+				Vector3 _iceMovementDirection = Vector3.ProjectOnPlane(CalculateMovementDirection(), _groundNormal);
+				if(_iceMovementDirection.sqrMagnitude > 0.0001f)
+				{
+					_horizontalMomentum += _iceMovementDirection.normalized * currentSlipperySurface.inputAcceleration * Time.deltaTime;
+				}
+
+				if(currentControllerState == ControllerState.Grounded)
+				{
+					Vector3 _downSlopeDirection = Vector3.ProjectOnPlane(-tr.up, _groundNormal);
+					if(_downSlopeDirection.sqrMagnitude > 0.0001f)
+						_horizontalMomentum += _downSlopeDirection.normalized * currentSlipperySurface.downhillAcceleration * Time.deltaTime;
+				}
+
+				if(currentSlipperySurface.projectMomentumToSurface)
+					_horizontalMomentum = Vector3.ProjectOnPlane(_horizontalMomentum, _groundNormal);
+			}
+
 			//Apply friction to horizontal momentum based on whether the controller is grounded;
 			if(currentControllerState == ControllerState.Grounded)
-				_horizontalMomentum = VectorMath.IncrementVectorTowardTargetVector(_horizontalMomentum, groundFriction, Time.deltaTime, Vector3.zero);
+			{
+				float _effectiveGroundFriction = _isOnSlipperySurface ? currentSlipperySurface.groundFriction : groundFriction;
+				_horizontalMomentum = VectorMath.IncrementVectorTowardTargetVector(_horizontalMomentum, _effectiveGroundFriction, Time.deltaTime, Vector3.zero);
+			}
 			else
 				_horizontalMomentum = VectorMath.IncrementVectorTowardTargetVector(_horizontalMomentum, airFriction, Time.deltaTime, Vector3.zero); 
 

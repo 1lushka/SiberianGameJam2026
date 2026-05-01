@@ -228,11 +228,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5211783953857221356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 678fe839c7c544b4cabc52bc3f6c716e, type: 3}
+  m_Script: {fileID: 11500000, guid: 50c538d376174018b2339f8f12c59730, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Slippery
-  accelerationMult: 0.3
-  decelerationMult: 0.2
+  m_EditorClassIdentifier: Assembly-CSharp::SlipperySurface
+  inputAcceleration: 18
+  groundFriction: 1.25
+  downhillAcceleration: 16
+  projectMomentumToSurface: 1
 --- !u!65 &8451789677679829038
 BoxCollider:
   m_ObjectHideFlags: 0
