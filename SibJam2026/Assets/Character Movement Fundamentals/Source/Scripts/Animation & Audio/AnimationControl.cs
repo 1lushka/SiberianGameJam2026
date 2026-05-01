@@ -8,7 +8,8 @@ namespace CMF
 	public class AnimationControl : MonoBehaviour {
 
 		Controller controller;
-		Animator animator;
+		[SerializeField]
+        Animator animator;
 		Transform animatorTransform;
 		Transform tr;
 
@@ -25,7 +26,7 @@ namespace CMF
 		//Setup;
 		void Awake () {
 			controller = GetComponent<Controller>();
-			animator = GetComponentInChildren<Animator>();
+			if (!animator)animator = GetComponentInChildren<Animator>();
 			animatorTransform = animator.transform;
 
 			tr = transform;
