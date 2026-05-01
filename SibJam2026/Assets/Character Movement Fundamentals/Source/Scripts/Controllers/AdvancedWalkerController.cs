@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CMF
@@ -34,6 +33,13 @@ namespace CMF
 		//Jump duration variables;
 		public float jumpDuration = 0.2f;
 		float currentJumpStartTime = 0f;
+
+		[SerializeField]
+		private float jumpBufferDuration = 0.2f;
+		[SerializeField]
+		private float coyoteTimeDuration = 0.1f;
+		float lastJumpButtonPressedTime = Mathf.NegativeInfinity;
+		float lastTimeGrounded = Mathf.NegativeInfinity;
 
 		//'AirFriction' determines how fast the controller loses its momentum while in the air;
 		//'GroundFriction' is used instead, if the controller is grounded;
@@ -129,6 +135,9 @@ namespace CMF
 
 			//Determine controller state;
 			currentControllerState = DetermineControllerState();
+
+			if(currentControllerState == ControllerState.Grounded)
+				lastTimeGrounded = Time.time;
 
 			//Apply friction and gravity to 'momentum';
 			HandleMomentum();
@@ -320,8 +329,8 @@ namespace CMF
 				if((Time.time - currentJumpStartTime) > jumpDuration)
 					return ControllerState.Rising;
 
-				//Check if jump key was let go;
-				if(jumpKeyWasLetGo)
+				//Stop extending the jump as soon as the key is no longer held;
+				if(jumpKeyWasLetGo || !jumpKeyIsPressed)
 					return ControllerState.Rising;
 
 				//If a ceiling detector has been attached to this gameobject, check for ceiling hits;
@@ -340,58 +349,50 @@ namespace CMF
 		}
 
 		//Check if player has initiated a jump;
-		[SerializeField]
-		private float jumpBufferDuration=0.2f;
-		private bool jumpBufferActive = false;
-
-        void HandleJumping()
-        {
-            
-            if ((jumpKeyIsPressed == true || jumpKeyWasPressed) && !jumpInputIsLocked)
-            {
-                if (currentControllerState == ControllerState.Grounded)
-					{
-                    //Call events;
-                    OnGroundContactLost();
-                    OnJumpStart();
-
-                    currentControllerState = ControllerState.Jumping;
-                }
-				else
-				{
-                    //If jump key was pressed shortly before landing, initiate jump on landing;
-                    if (jumpBufferActive == false)
-                    {
-                        StartCoroutine(JumpBuffer());
-                    }
-					else
-					{
-						StopCoroutine(JumpBuffer());
-                        StartCoroutine(JumpBuffer());
-                    }
-                }
-            }
-           
-        }
-		private IEnumerator JumpBuffer()
+		void HandleJumping()
 		{
-            jumpBufferActive = true;
-            float timer = 0f;
-            while (timer < jumpBufferDuration)
-            {
-                if (currentControllerState == ControllerState.Grounded)
-                {
-                    //Call events;
-                    OnGroundContactLost();
-                    OnJumpStart();
-                    currentControllerState = ControllerState.Jumping;
-                    break;
-                }
-                timer += Time.deltaTime;
-                yield return null;
-            }
-            jumpBufferActive = false;
-        }
+			if(jumpKeyWasPressed && !jumpInputIsLocked)
+				lastJumpButtonPressedTime = Time.time;
+
+			if(!HasBufferedJumpRequest())
+				return;
+
+			if(currentControllerState == ControllerState.Grounded)
+			{
+				StartJump(true);
+				return;
+			}
+
+			if(CanUseCoyoteJump())
+				StartJump(false);
+		}
+
+		bool HasBufferedJumpRequest()
+		{
+			if(jumpInputIsLocked)
+				return false;
+
+			return (Time.time - lastJumpButtonPressedTime) <= jumpBufferDuration;
+		}
+
+		bool CanUseCoyoteJump()
+		{
+			if(currentControllerState != ControllerState.Falling)
+				return false;
+
+			return (Time.time - lastTimeGrounded) <= coyoteTimeDuration;
+		}
+
+		void StartJump(bool notifyGroundContactLost)
+		{
+			if(notifyGroundContactLost)
+				OnGroundContactLost();
+
+			lastJumpButtonPressedTime = Mathf.NegativeInfinity;
+			lastTimeGrounded = Mathf.NegativeInfinity;
+			OnJumpStart();
+			currentControllerState = ControllerState.Jumping;
+		}
 
         //Apply friction to both vertical and horizontal momentum based on 'friction' and 'gravity';
         //Handle movement in the air;
@@ -509,8 +510,8 @@ namespace CMF
 			//Set jump start time;
 			currentJumpStartTime = Time.time;
 
-            //Lock jump input until jump key is released again;
-            jumpInputIsLocked = true;
+            //Only keep jump input locked while the key is physically held down;
+            jumpInputIsLocked = jumpKeyIsPressed;
 
             //Call event;
             if (OnJump != null)

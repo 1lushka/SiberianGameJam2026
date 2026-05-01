@@ -621,9 +621,11 @@ MonoBehaviour:
   movementSpeed: 10
   airControlRate: 7
   jumpSpeed: 7
-  jumpDuration: 0.4
-  airFriction: 10
-  groundFriction: 100
+  jumpDuration: 0.3
+  jumpBufferDuration: 0.2
+  coyoteTimeDuration: 0.25
+  airFriction: 7
+  groundFriction: 500
   gravity: 30
   slideGravity: 10
   slopeLimit: 80
