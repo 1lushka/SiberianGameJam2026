@@ -339,24 +339,62 @@ namespace CMF
 			return ControllerState.Falling;
 		}
 
-        //Check if player has initiated a jump;
+		//Check if player has initiated a jump;
+		[SerializeField]
+		private float jumpBufferDuration=0.2f;
+		private bool jumpBufferActive = false;
+
         void HandleJumping()
         {
-            if (currentControllerState == ControllerState.Grounded)
+            
+            if ((jumpKeyIsPressed == true || jumpKeyWasPressed) && !jumpInputIsLocked)
             {
-                if ((jumpKeyIsPressed == true || jumpKeyWasPressed) && !jumpInputIsLocked)
-                {
+                if (currentControllerState == ControllerState.Grounded)
+					{
                     //Call events;
                     OnGroundContactLost();
                     OnJumpStart();
 
                     currentControllerState = ControllerState.Jumping;
                 }
+				else
+				{
+                    //If jump key was pressed shortly before landing, initiate jump on landing;
+                    if (jumpBufferActive == false)
+                    {
+                        StartCoroutine(JumpBuffer());
+                    }
+					else
+					{
+						StopCoroutine(JumpBuffer());
+                        StartCoroutine(JumpBuffer());
+                    }
+                }
             }
+           
+        }
+		private IEnumerator JumpBuffer()
+		{
+            jumpBufferActive = true;
+            float timer = 0f;
+            while (timer < jumpBufferDuration)
+            {
+                if (currentControllerState == ControllerState.Grounded)
+                {
+                    //Call events;
+                    OnGroundContactLost();
+                    OnJumpStart();
+                    currentControllerState = ControllerState.Jumping;
+                    break;
+                }
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            jumpBufferActive = false;
         }
 
         //Apply friction to both vertical and horizontal momentum based on 'friction' and 'gravity';
-		//Handle movement in the air;
+        //Handle movement in the air;
         //Handle sliding down steep slopes;
         void HandleMomentum()
 		{
