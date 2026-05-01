@@ -1,19 +1,36 @@
+using CMF;
 using UnityEngine;
 
 public class Bouncy : MonoBehaviour
 {
-    [Tooltip("Фиксированная сила отскока")]
     public float bounceForce = 10f;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (!collision.gameObject.CompareTag("Player")) return;
+        if (!other.CompareTag("Player")) return;
+        
 
-        Rigidbody playerRb = collision.rigidbody;
-        if (playerRb == null) return;
+        AdvancedWalkerController controller = other.GetComponent<AdvancedWalkerController>();
+        if (controller == null)
+            controller = other.GetComponentInParent<AdvancedWalkerController>();
 
-        Vector3 normal = collision.contacts[0].normal;
+        if (controller == null) return;
 
-        playerRb.AddForce(normal * bounceForce, ForceMode.Impulse);
+        
+
+        // Берём коллайдер самого батута (на этом же объекте)
+        Collider bounceCollider = GetComponent<Collider>();
+        if (bounceCollider == null) return;
+        print("asdasd");
+
+
+        // Ближайшая точка на коллайдере к центру игрока (или его ногам)
+        Vector3 playerPos = other.bounds.center;   // можно other.transform.position
+        Vector3 closestPoint = bounceCollider.ClosestPoint(playerPos);
+
+        // Нормаль: от поверхности к игроку (аналог collision.contacts[0].normal)
+        Vector3 normal = (playerPos - closestPoint).normalized;
+
+        controller.AddMomentum(normal * bounceForce);
     }
 }
