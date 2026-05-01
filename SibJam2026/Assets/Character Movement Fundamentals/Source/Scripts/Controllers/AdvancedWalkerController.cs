@@ -22,6 +22,10 @@ namespace CMF
 
 		//Movement speed;
 		public float movementSpeed = 7f;
+		[Tooltip("Ground acceleration in units per second. Lower values produce a slower ramp-up to full speed.")]
+		public float acceleration = 60f;
+		[Tooltip("Ground deceleration in units per second. Lower values produce a longer slide before stopping.")]
+		public float deceleration = 80f;
 
 		//How fast the controller can change direction while in the air;
 		//Higher values result in more air control;
@@ -54,6 +58,8 @@ namespace CMF
 
 		//Saved horizontal movement velocity from last frame;
 		Vector3 savedMovementVelocity = Vector3.zero;
+		Vector3 currentMovementVelocity = Vector3.zero;
+		bool acceleratingFromRest = false;
 
 		//Amount of downward gravity;
 		public float gravity = 30f;
@@ -139,6 +145,8 @@ namespace CMF
 			if(currentControllerState == ControllerState.Grounded)
 				lastTimeGrounded = Time.time;
 
+			UpdateMovementVelocity();
+
 			//Apply friction and gravity to 'momentum';
 			HandleMomentum();
 
@@ -148,7 +156,7 @@ namespace CMF
 			//Calculate movement velocity;
 			Vector3 _velocity = Vector3.zero;
 			if(currentControllerState == ControllerState.Grounded)
-				_velocity = CalculateMovementVelocity();
+				_velocity = currentMovementVelocity;
 			
 			//If local momentum is used, transform momentum into world space first;
 			Vector3 _worldMomentum = momentum;
@@ -169,7 +177,10 @@ namespace CMF
 			savedVelocity = _velocity;
 		
 			//Save controller movement velocity;
-			savedMovementVelocity = CalculateMovementVelocity();
+			if(currentControllerState == ControllerState.Grounded)
+				savedMovementVelocity = currentMovementVelocity;
+			else
+				savedMovementVelocity = CalculateMovementVelocity();
 
 			//Reset jump key booleans;
 			jumpKeyWasLetGo = false;
@@ -221,6 +232,77 @@ namespace CMF
 			_velocity *= movementSpeed;
 
 			return _velocity;
+		}
+
+		void UpdateMovementVelocity()
+		{
+			Vector3 _targetMovementVelocity = CalculateMovementVelocity();
+
+			if(currentControllerState == ControllerState.Grounded)
+			{
+				if(_targetMovementVelocity.sqrMagnitude <= 0f)
+				{
+					acceleratingFromRest = false;
+
+					if(deceleration <= 0f)
+					{
+						return;
+					}
+
+					currentMovementVelocity = VectorMath.IncrementVectorTowardTargetVector(
+						currentMovementVelocity,
+						deceleration,
+						Time.deltaTime,
+						Vector3.zero
+					);
+					return;
+				}
+
+				if(!acceleratingFromRest && IsStartingFromRest())
+					acceleratingFromRest = true;
+
+				if(acceleratingFromRest)
+				{
+					if(acceleration <= 0f)
+						return;
+
+					currentMovementVelocity = VectorMath.IncrementVectorTowardTargetVector(
+						currentMovementVelocity,
+						acceleration,
+						Time.deltaTime,
+						_targetMovementVelocity
+					);
+
+					if((currentMovementVelocity - _targetMovementVelocity).sqrMagnitude <= 0.0001f)
+					{
+						currentMovementVelocity = _targetMovementVelocity;
+						acceleratingFromRest = false;
+					}
+
+					return;
+				}
+
+				currentMovementVelocity = _targetMovementVelocity;
+				acceleratingFromRest = false;
+			}
+			else
+			{
+				acceleratingFromRest = false;
+			}
+		}
+
+		bool IsStartingFromRest()
+		{
+			float _movementThreshold = 0.01f;
+
+			if(currentMovementVelocity.sqrMagnitude > (_movementThreshold * _movementThreshold))
+				return false;
+
+			Vector3 _horizontalMomentum = VectorMath.RemoveDotVector(GetMomentum(), tr.up);
+			if(_horizontalMomentum.sqrMagnitude > (_movementThreshold * _movementThreshold))
+				return false;
+
+			return true;
 		}
 
 		//Returns 'true' if the player presses the jump key;
