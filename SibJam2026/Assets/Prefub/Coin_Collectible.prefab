@@ -238,7 +238,7 @@ MonoBehaviour:
   propertyChildren:
   - {fileID: 1042738388180064066}
   - {fileID: 8801731068697761873}
-  startIndex: 1
+  startIndex: 0
 --- !u!1 &4672691120393300405
 GameObject:
   m_ObjectHideFlags: 0
