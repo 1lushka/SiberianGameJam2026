@@ -24,13 +24,15 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 46a1c1319a1da804e8436d59cd43abff, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _ALPHATEST_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    RenderType: TransparentCutout
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -66,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 596998b6abb15b34ba8715c1a8ca5f1f, type: 3}
+        m_Texture: {fileID: 2800000, guid: fd1ffc33120e8c047a0d8e7ea25e7a3a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -82,10 +84,18 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowTexture2D:
-        m_Texture: {fileID: 2800000, guid: 81a1918dd35262446896f2119198a6be, type: 3}
+        m_Texture: {fileID: 2800000, guid: f3bc5c6c787adc34dbe2ddb8d325ad2e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadowTexture2D2:
+        m_Texture: {fileID: 2800000, guid: 70b196c29bd66164a90153a64caf792a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_2a5f660375f64edf8dcdf1b1ddf31ca7_Texture_1_Texture2D:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -104,14 +114,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _AddPrecomputedVelocity: 0
-    - _AlphaClip: 0
-    - _AlphaToMask: 0
+    - _AlphaClip: 1
+    - _AlphaToMask: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
+    - _CastShadows: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -136,18 +147,21 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _TextureScale: 4
-    - _TextureSpeed: 2
+    - _TextureScale_1: 3.89
+    - _TextureSpeed: 4
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
+    - _ZTest: 4
     - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
-    - _ShadowColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _ShadowPatternColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 0}
-    - _ShadowTextureTiling: {r: 5, g: 5, b: 0, a: 0}
+    - _ShadowColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+    - _ShadowPatternColor: {r: 0.3, g: 0.3, b: 0.3, a: 0}
+    - _ShadowTextureTiling: {r: 2, g: 2, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
