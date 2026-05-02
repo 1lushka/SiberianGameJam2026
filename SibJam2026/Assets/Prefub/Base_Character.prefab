@@ -5548,13 +5548,13 @@ MonoBehaviour:
   maxUpwardSpeedToGrab: 2
   regrabCooldown: 0.2
   topCheckHeight: 1.8
-  topCheckForwardOffset: 0.45
+  topCheckForwardOffset: 1
   topCheckRadius: 0.18
-  topCheckDistance: 0.75
+  topCheckDistance: 1.5
   topSurfaceMaxAngle: 25
-  frontCheckHeight: 1.25
+  frontCheckHeight: 0.5
   frontCheckRadius: 0.18
-  frontCheckDistance: 0.6
+  frontCheckDistance: 1
   wallFacingMaxAngle: 60
   wallVerticalAngleTolerance: 20
   minimumLedgeHeight: 0.35
@@ -5563,16 +5563,16 @@ MonoBehaviour:
   hangVerticalOffset: 1.2
   hangSnapSpeed: 14
   faceWallTurnSpeed: 1080
-  ledgeMoveSpeed: 2.5
+  ledgeMoveSpeed: 6
   horizontalInputDeadZone: 0.15
   sameWallNormalTolerance: 25
   hangPositionSnapDistance: 0.02
   dropKey: 304
   jumpInputBufferDuration: 0.15
   dropAwaySpeed: 1.5
-  jumpOffUpwardSpeed: 7
-  jumpOffAwaySpeed: 2.5
-  drawDebug: 0
+  jumpOffUpwardSpeed: 15
+  jumpOffAwaySpeed: 5
+  drawDebug: 1
 --- !u!114 &6722736412762474085
 MonoBehaviour:
   m_ObjectHideFlags: 0
