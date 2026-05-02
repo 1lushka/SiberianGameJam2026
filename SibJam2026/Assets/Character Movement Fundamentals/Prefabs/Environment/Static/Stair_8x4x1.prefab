@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 64794604974383148}
   - component: {fileID: 194832809345710880}
   - component: {fileID: 2234596188125675102}
+  - component: {fileID: -7909426062925482428}
   m_Layer: 0
   m_Name: Stair_8x4x1
   m_TagString: Untagged
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489980706635944}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f162430758e31654a96ba9d4895d3c68, type: 3}
   m_Name: 
@@ -159,3 +160,16 @@ MonoBehaviour:
   vibrato: 30
   shrinkDuration: 0.4
   delayBeforeShrink: 0
+--- !u!114 &-7909426062925482428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489980706635944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d84c51db8e9e94292e750b92eadca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bouncy
+  bounceForce: 22

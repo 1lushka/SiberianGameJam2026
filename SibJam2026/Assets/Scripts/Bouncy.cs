@@ -4,30 +4,46 @@ using UnityEngine;
 public class Bouncy : MonoBehaviour
 {
     public float bounceForce = 10f;
+    private Collider cachedBounceCollider;
 
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        if (!other.CompareTag("Player")) return;
-        
+        cachedBounceCollider = FindBounceCollider();
+    }
 
-        AdvancedWalkerController controller = other.GetComponent<AdvancedWalkerController>();
+    public bool TriggerBounce(AdvancedWalkerController controller, Collider playerCollider)
+    {
         if (controller == null)
-            controller = other.GetComponentInParent<AdvancedWalkerController>();
-
-        if (controller == null) return;
+            return false;
 
         Collider bounceCollider = GetBounceCollider();
-        if (bounceCollider == null) return;
+        if (bounceCollider == null)
+            return false;
 
-        Vector3 bounceDirection = GetBounceDirection(bounceCollider, other.bounds.center);
+        Vector3 playerPosition = playerCollider != null
+            ? playerCollider.bounds.center
+            : controller.transform.position;
+
+        Vector3 bounceDirection = GetBounceDirection(bounceCollider, playerPosition);
         Vector3 currentMomentum = controller.GetMomentum();
 
         // Preserve sideways motion, but keep bounce speed along the hit side deterministic.
         Vector3 lateralMomentum = Vector3.ProjectOnPlane(currentMomentum, bounceDirection);
         controller.SetMomentum(lateralMomentum + bounceDirection * bounceForce);
+
+        return true;
     }
 
     private Collider GetBounceCollider()
+    {
+        if (cachedBounceCollider != null && cachedBounceCollider.enabled)
+            return cachedBounceCollider;
+
+        cachedBounceCollider = FindBounceCollider();
+        return cachedBounceCollider;
+    }
+
+    private Collider FindBounceCollider()
     {
         Collider[] colliders = GetComponentsInChildren<Collider>();
         Collider fallbackTrigger = null;

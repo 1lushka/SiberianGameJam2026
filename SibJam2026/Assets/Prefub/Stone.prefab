@@ -158,11 +158,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f162430758e31654a96ba9d4895d3c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Disappearing
-  shakeDuration: 1
+  shakeDuration: 2
   shakeStrength: 0.15
   vibrato: 30
   shrinkDuration: 0.4
-  delayBeforeShrink: 0.1
+  delayBeforeShrink: 0
 --- !u!54 &6697172105266456198
 Rigidbody:
   m_ObjectHideFlags: 0
