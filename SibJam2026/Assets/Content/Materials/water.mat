@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ice
+  m_Name: water
   m_Shader: {fileID: -6465566751694194690, guid: 006ec0e2c5bd63a4782e283bdd6bcf5f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -47,7 +47,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Texture:
-        m_Texture: {fileID: 2800000, guid: 66ef4751b6bfd324293f254edba7751f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2e6dd4025c1e4684cb625e151fa72f81, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -67,7 +67,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Dissolve_Texture:
-        m_Texture: {fileID: 2800000, guid: 093976a30664dc34ca856547df50c59a, type: 3}
+        m_Texture: {fileID: 2800000, guid: b9062a1dad4bd094a958e8d1742e21ec, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -123,7 +123,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _DstBlendAlpha: 10
-    - _Effect: 0
+    - _Effect: 50
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -147,7 +147,7 @@ Material:
     - _ZWriteControl: 2
     m_Colors:
     - _BaseColor: {r: 0.29716974, g: 0.66486174, b: 1, a: 0.5019608}
-    - _Base_Color: {r: 0.42352945, g: 0.654902, b: 0.90196085, a: 0.7490196}
+    - _Base_Color: {r: 0.28555536, g: 0.8773585, b: 0.8657687, a: 0.7490196}
     - _Color: {r: 0.29716972, g: 0.66486174, b: 1, a: 0.5019608}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
