@@ -231,10 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c538d376174018b2339f8f12c59730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlipperySurface
-  inputAcceleration: 18
-  groundFriction: 1.25
-  downhillAcceleration: 16
-  projectMomentumToSurface: 1
+  movementPresetOverride: {fileID: 11400000, guid: 6af1d2c4e98b4e3a91c7f0b25d6e4831, type: 2}
 --- !u!65 &8451789677679829038
 BoxCollider:
   m_ObjectHideFlags: 0

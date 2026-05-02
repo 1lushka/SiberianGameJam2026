@@ -375,6 +375,14 @@ namespace CMF
 		{
 			return sensor.GetCollider();
 		}
+
+		public Vector3 GetVelocity()
+		{
+			if(rig == null)
+				return Vector3.zero;
+
+			return rig.linearVelocity;
+		}
 		
 	}
 }

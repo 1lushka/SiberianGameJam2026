@@ -5497,6 +5497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5e44db14072ea4c964da3b192181c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMovementPreset: {fileID: 11400000, guid: c3e4a7b81d0f4ea8b25fd4ac74f2c611, type: 2}
+  slipperySurfaceMovementPreset: {fileID: 11400000, guid: 6af1d2c4e98b4e3a91c7f0b25d6e4831, type: 2}
   movementSpeed: 10
   acceleration: 30
   deceleration: 150
@@ -5548,13 +5550,13 @@ MonoBehaviour:
   maxUpwardSpeedToGrab: 2
   regrabCooldown: 0.2
   topCheckHeight: 1.8
-  topCheckForwardOffset: 0.45
+  topCheckForwardOffset: 1
   topCheckRadius: 0.18
-  topCheckDistance: 0.75
+  topCheckDistance: 1.5
   topSurfaceMaxAngle: 25
-  frontCheckHeight: 1.25
+  frontCheckHeight: 0.5
   frontCheckRadius: 0.18
-  frontCheckDistance: 0.6
+  frontCheckDistance: 1
   wallFacingMaxAngle: 60
   wallVerticalAngleTolerance: 20
   minimumLedgeHeight: 0.35
@@ -5563,16 +5565,17 @@ MonoBehaviour:
   hangVerticalOffset: 1.2
   hangSnapSpeed: 14
   faceWallTurnSpeed: 1080
-  ledgeMoveSpeed: 2.5
+  ledgeMoveSpeed: 6
   horizontalInputDeadZone: 0.15
   sameWallNormalTolerance: 25
   hangPositionSnapDistance: 0.02
   dropKey: 304
   jumpInputBufferDuration: 0.15
   dropAwaySpeed: 1.5
-  jumpOffUpwardSpeed: 7
-  jumpOffAwaySpeed: 2.5
-  drawDebug: 0
+  jumpOffUpwardSpeed: 15
+  jumpOffAwaySpeed: 5
+  drawDebug: 1
+  animator: {fileID: 0}
 --- !u!114 &6722736412762474085
 MonoBehaviour:
   m_ObjectHideFlags: 0

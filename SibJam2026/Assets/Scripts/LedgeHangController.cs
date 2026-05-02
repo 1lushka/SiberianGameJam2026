@@ -69,10 +69,13 @@ namespace CMF
 		AdvancedWalkerController controller;
 		Mover mover;
 		CharacterInput characterInput;
+		[SerializeField] Animator animator;
 		Rigidbody rig;
 		Transform tr;
 		TurnTowardControllerVelocity[] turnTowardVelocityComponents;
 		bool[] turnTowardVelocityStates;
+		static readonly int IsClimbHash = Animator.StringToHash("IsClimb");
+		static readonly int ClimbingMoveHash = Animator.StringToHash("ClimbingMove");
 
 		bool isHanging = false;
 		bool jumpKeyIsPressed = false;
@@ -93,6 +96,8 @@ namespace CMF
 			controller = GetComponent<AdvancedWalkerController>();
 			mover = GetComponent<Mover>();
 			characterInput = GetComponent<CharacterInput>();
+			if(animator == null)
+				animator = GetComponentInChildren<Animator>();
 			rig = GetComponent<Rigidbody>();
 			tr = transform;
 			turnTowardVelocityComponents = GetComponentsInChildren<TurnTowardControllerVelocity>(true);
@@ -148,7 +153,10 @@ namespace CMF
 		void OnDisable()
 		{
 			if(!isHanging)
+			{
+				SetClimbAnimationState(false);
 				return;
+			}
 
 			isHanging = false;
 
@@ -166,6 +174,7 @@ namespace CMF
 			}
 
 			RestoreTurnTowardComponents();
+			SetClimbAnimationState(false);
 		}
 
 		void OnDrawGizmos()
@@ -223,6 +232,8 @@ namespace CMF
 			rig.linearVelocity = Vector3.zero;
 			rig.angularVelocity = Vector3.zero;
 			SnapToWallRotation();
+			SetClimbAnimationState(true);
+			SetClimbingMoveParameter(0f);
 		}
 
 		void HandleLedgeHang()
@@ -252,6 +263,7 @@ namespace CMF
 			UpdateSideMovementTarget();
 			MoveTowardHangPoint();
 			UpdateHangRotation();
+			UpdateClimbingAnimation();
 		}
 
 		void UpdateSideMovementTarget()
@@ -346,6 +358,53 @@ namespace CMF
 
 			if(_releaseVelocity.sqrMagnitude > 0.0001f)
 				lastProbeForward = Vector3.ProjectOnPlane(_releaseVelocity, tr.up).normalized;
+
+			SetClimbAnimationState(false);
+		}
+
+		void UpdateClimbingAnimation()
+		{
+			if(animator == null || rig == null)
+				return;
+
+			float _horizontalInput = characterInput != null ? characterInput.GetHorizontalMovementInput() : 0f;
+			if(Mathf.Abs(_horizontalInput) < horizontalInputDeadZone)
+			{
+				SetClimbingMoveParameter(0f);
+				return;
+			}
+
+			Vector3 _ledgeTangent = Vector3.Cross(currentWallNormal, tr.up).normalized;
+			if(_ledgeTangent.sqrMagnitude <= 0.0001f)
+			{
+				SetClimbingMoveParameter(0f);
+				return;
+			}
+
+			float _signedSpeed = Vector3.Dot(rig.linearVelocity, _ledgeTangent);
+			float _climbingMove = ledgeMoveSpeed > 0f
+				? Mathf.Clamp(_signedSpeed / ledgeMoveSpeed, -1f, 1f)
+				: Mathf.Sign(_signedSpeed);
+
+			SetClimbingMoveParameter(_climbingMove);
+		}
+
+		void SetClimbAnimationState(bool _isClimbing)
+		{
+			if(animator == null)
+				return;
+
+			animator.SetBool(IsClimbHash, _isClimbing);
+			if(!_isClimbing)
+				SetClimbingMoveParameter(0f);
+		}
+
+		void SetClimbingMoveParameter(float _value)
+		{
+			if(animator == null)
+				return;
+
+			animator.SetFloat(ClimbingMoveHash, _value);
 		}
 
 		bool TryGetLedgeFromAvailableDirections(Vector3 _rootPosition, out LedgeData _ledgeData)
