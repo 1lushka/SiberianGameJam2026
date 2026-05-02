@@ -55,7 +55,7 @@ public class Disappearing : MonoBehaviour
     {
         if (triggered) return;
         triggered = true;
-       // StartDisappearing();
+        StartDisappearing();
     }
 
 
