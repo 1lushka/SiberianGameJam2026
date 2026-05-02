@@ -22,6 +22,7 @@ MonoBehaviour:
   jumpBufferDuration: 0.2
   coyoteTimeDuration: 0.25
   groundFriction: 1000
+  slideFriction: 2
   gravity: 30
   slideGravity: 5
   slopeLimit: 40

@@ -15,13 +15,14 @@ MonoBehaviour:
   movementSpeed: 14
   acceleration: 18
   deceleration: 8
-  airControlRate: 5
+  airControlRate: 0.75
   airFriction: 10
   jumpSpeed: 7
   jumpDuration: 0.3
   jumpBufferDuration: 0.2
   coyoteTimeDuration: 0.25
   groundFriction: 150
+  slideFriction: 0.05
   gravity: 30
-  slideGravity: 5
+  slideGravity: 28
   slopeLimit: 18

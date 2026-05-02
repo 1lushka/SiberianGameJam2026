@@ -20,6 +20,7 @@ public class CharacterMovementPreset : ScriptableObject
 
 	[Header("Physics")]
 	public float groundFriction = 100f;
+	public float slideFriction = 2f;
 	public float gravity = 30f;
 	public float slideGravity = 5f;
 	public float slopeLimit = 80f;
@@ -36,6 +37,7 @@ public class CharacterMovementPreset : ScriptableObject
 		jumpBufferDuration = Mathf.Max(0f, jumpBufferDuration);
 		coyoteTimeDuration = Mathf.Max(0f, coyoteTimeDuration);
 		groundFriction = Mathf.Max(0f, groundFriction);
+		slideFriction = Mathf.Max(0f, slideFriction);
 		gravity = Mathf.Max(0f, gravity);
 		slideGravity = Mathf.Max(0f, slideGravity);
 		slopeLimit = Mathf.Clamp(slopeLimit, 0f, 89.9f);

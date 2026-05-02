@@ -66,7 +66,6 @@ namespace CMF
 		//Saved horizontal movement velocity from last frame;
 		Vector3 savedMovementVelocity = Vector3.zero;
 		Vector3 currentMovementVelocity = Vector3.zero;
-		bool acceleratingFromRest = false;
 
 		//Amount of downward gravity;
 		public float gravity = 30f;
@@ -154,12 +153,18 @@ namespace CMF
 			mover.CheckForGround();
 			UpdateSurfaceMovementPreset();
 
+			ControllerState _previousControllerState = currentControllerState;
+
 			//Determine controller state;
 			currentControllerState = DetermineControllerState();
 
 			if(currentControllerState == ControllerState.Grounded)
 				lastTimeGrounded = Time.time;
 
+			if(currentControllerState == ControllerState.Grounded && _previousControllerState != ControllerState.Grounded)
+				TransferHorizontalMomentumToGroundMovement();
+
+			ApplyGroundMovementCollisionFeedback(_previousControllerState);
 			UpdateMovementVelocity();
 
 			//Apply friction and gravity to 'momentum';
@@ -194,6 +199,8 @@ namespace CMF
 			//Save controller movement velocity;
 			if(currentControllerState == ControllerState.Grounded)
 				savedMovementVelocity = currentMovementVelocity;
+			else if(currentControllerState == ControllerState.Sliding)
+				savedMovementVelocity = VectorMath.RemoveDotVector(mover.GetVelocity(), tr.up);
 			else
 				savedMovementVelocity = CalculateMovementVelocity();
 
@@ -257,10 +264,9 @@ namespace CMF
 			{
 				if(_targetMovementVelocity.sqrMagnitude <= 0f)
 				{
-					acceleratingFromRest = false;
-
 					if(GetDeceleration() <= 0f)
 					{
+						currentMovementVelocity = Vector3.zero;
 						return;
 					}
 
@@ -273,13 +279,13 @@ namespace CMF
 					return;
 				}
 
-				if(!acceleratingFromRest && IsStartingFromRest())
-					acceleratingFromRest = true;
-
-				if(acceleratingFromRest)
+				if(currentMovementVelocity.sqrMagnitude <= 0.0001f)
 				{
 					if(GetAcceleration() <= 0f)
+					{
+						currentMovementVelocity = _targetMovementVelocity;
 						return;
+					}
 
 					currentMovementVelocity = VectorMath.IncrementVectorTowardTargetVector(
 						currentMovementVelocity,
@@ -289,35 +295,88 @@ namespace CMF
 					);
 
 					if((currentMovementVelocity - _targetMovementVelocity).sqrMagnitude <= 0.0001f)
-					{
 						currentMovementVelocity = _targetMovementVelocity;
-						acceleratingFromRest = false;
-					}
 
 					return;
 				}
 
-				currentMovementVelocity = _targetMovementVelocity;
-				acceleratingFromRest = false;
+				float _directionDot = Vector3.Dot(currentMovementVelocity.normalized, _targetMovementVelocity.normalized);
+				if(_directionDot < 0f)
+				{
+					currentMovementVelocity = VectorMath.IncrementVectorTowardTargetVector(
+						currentMovementVelocity,
+						GetDeceleration(),
+						Time.deltaTime,
+						Vector3.zero
+					);
+					return;
+				}
+
+				float _speedChangeRate = _targetMovementVelocity.sqrMagnitude > currentMovementVelocity.sqrMagnitude
+					? GetAcceleration()
+					: GetDeceleration();
+
+				if(_speedChangeRate <= 0f)
+				{
+					currentMovementVelocity = _targetMovementVelocity;
+					return;
+				}
+
+				currentMovementVelocity = VectorMath.IncrementVectorTowardTargetVector(
+					currentMovementVelocity,
+					_speedChangeRate,
+					Time.deltaTime,
+					_targetMovementVelocity
+				);
 			}
 			else
 			{
-				acceleratingFromRest = false;
+				currentMovementVelocity = Vector3.zero;
 			}
 		}
 
-		bool IsStartingFromRest()
+		void ApplyGroundMovementCollisionFeedback(ControllerState _previousControllerState)
 		{
-			float _movementThreshold = 0.01f;
+			if(currentControllerState != ControllerState.Grounded)
+				return;
 
-			if(currentMovementVelocity.sqrMagnitude > (_movementThreshold * _movementThreshold))
-				return false;
+			if(_previousControllerState != ControllerState.Grounded)
+				return;
 
-			Vector3 _horizontalMomentum = VectorMath.RemoveDotVector(GetMomentum(), tr.up);
-			if(_horizontalMomentum.sqrMagnitude > (_movementThreshold * _movementThreshold))
-				return false;
+			if(currentMovementVelocity.sqrMagnitude <= 0.0001f || mover == null)
+				return;
 
-			return true;
+			Vector3 _actualHorizontalVelocity = VectorMath.RemoveDotVector(mover.GetVelocity(), tr.up);
+			Vector3 _desiredDirection = currentMovementVelocity.normalized;
+
+			float _desiredSpeed = Vector3.Dot(currentMovementVelocity, _desiredDirection);
+			float _actualSpeedInDesiredDirection = Mathf.Max(0f, Vector3.Dot(_actualHorizontalVelocity, _desiredDirection));
+
+			if(_actualSpeedInDesiredDirection >= (_desiredSpeed - 0.01f))
+				return;
+
+			currentMovementVelocity = _desiredDirection * _actualSpeedInDesiredDirection;
+		}
+
+		void TransferHorizontalMomentumToGroundMovement()
+		{
+			Vector3 _worldMomentum = momentum;
+			if(useLocalMomentum)
+				_worldMomentum = tr.localToWorldMatrix * momentum;
+
+			Vector3 _groundNormal = mover != null && mover.IsGrounded() ? mover.GetGroundNormal() : tr.up;
+			Vector3 _horizontalMomentum = Vector3.ProjectOnPlane(_worldMomentum, _groundNormal);
+			if(_horizontalMomentum.sqrMagnitude > 0.0001f)
+				currentMovementVelocity = _horizontalMomentum;
+
+			_worldMomentum -= _horizontalMomentum;
+			if(VectorMath.GetDotProduct(_worldMomentum, tr.up) < 0f)
+				_worldMomentum = VectorMath.RemoveDotVector(_worldMomentum, tr.up);
+
+			if(useLocalMomentum)
+				momentum = tr.worldToLocalMatrix * _worldMomentum;
+			else
+				momentum = _worldMomentum;
 		}
 
 		//Returns 'true' if the player presses the jump key;
@@ -469,6 +528,14 @@ namespace CMF
 				return;
 			}
 
+			if(currentControllerState == ControllerState.Sliding)
+			{
+				//Sliding already moved ground speed into momentum when the slope was entered,
+				//so jumping from a steep slope should not add a second forward boost.
+				StartJump(false);
+				return;
+			}
+
 			if(CanUseCoyoteJump())
 				StartJump(false);
 		}
@@ -569,6 +636,8 @@ namespace CMF
 			//Apply friction to horizontal momentum based on whether the controller is grounded;
 			if(currentControllerState == ControllerState.Grounded)
 				_horizontalMomentum = VectorMath.IncrementVectorTowardTargetVector(_horizontalMomentum, GetGroundFriction(), Time.deltaTime, Vector3.zero);
+			else if(currentControllerState == ControllerState.Sliding)
+				_horizontalMomentum = VectorMath.IncrementVectorTowardTargetVector(_horizontalMomentum, GetSlideFriction(), Time.deltaTime, Vector3.zero);
 			else
 				_horizontalMomentum = VectorMath.IncrementVectorTowardTargetVector(_horizontalMomentum, GetAirFriction(), Time.deltaTime, Vector3.zero); 
 
@@ -580,10 +649,6 @@ namespace CMF
 			{
 				//Project the current momentum onto the current ground normal if the controller is sliding down a slope;
 				momentum = Vector3.ProjectOnPlane(momentum, mover.GetGroundNormal());
-
-				//Remove any upwards momentum when sliding;
-				if(VectorMath.GetDotProduct(momentum, tr.up) > 0f)
-					momentum = VectorMath.RemoveDotVector(momentum, tr.up);
 
 				//Apply additional slide gravity;
 				Vector3 _slideDirection = Vector3.ProjectOnPlane(-tr.up, mover.GetGroundNormal()).normalized;
@@ -821,6 +886,12 @@ namespace CMF
 		{
 			CharacterMovementPreset _preset = GetCurrentMovementPreset();
 			return _preset != null ? _preset.groundFriction : groundFriction;
+		}
+
+		float GetSlideFriction()
+		{
+			CharacterMovementPreset _preset = GetCurrentMovementPreset();
+			return _preset != null ? _preset.slideFriction : airFriction;
 		}
 
 		float GetGravity()
