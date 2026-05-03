@@ -7,6 +7,8 @@ public class Collectible : BaseProperty
 
     void OnTriggerEnter(Collider other)
     {
+        if (isActiveAndEnabled == false)
+            return;
         if (!other.CompareTag("Player")) return;
 
         if (CoinCounter.Instance != null)

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1318377966934053301}
   m_Layer: 6
   m_Name: Coin_Collectible
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
   propertyScripts:
-  - {fileID: 2379349441969058861}
   - {fileID: 1347797074166853515}
+  - {fileID: 2379349441969058861}
   propertyMaterials: []
 --- !u!114 &1347797074166853515
 MonoBehaviour:
@@ -99,8 +99,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.18306947, y: 0.8609369, z: 0.87809944}
+  m_Center: {x: -0.0037270784, y: -0.0143710375, z: 0.017359734}
 --- !u!54 &1318377966934053301
 Rigidbody:
   m_ObjectHideFlags: 0

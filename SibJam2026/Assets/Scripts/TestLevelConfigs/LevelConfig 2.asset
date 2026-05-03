@@ -16,4 +16,4 @@ MonoBehaviour:
   isFinalLevel: 1
   tagBindings:
   - tag: Coin
-    propertyIndex: 1
+    propertyIndex: 0
