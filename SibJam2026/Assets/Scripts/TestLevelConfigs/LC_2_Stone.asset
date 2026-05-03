@@ -17,3 +17,4 @@ MonoBehaviour:
   tagBindings:
   - tag: Coin
     propertyIndex: 0
+  levelMusic: {fileID: 8300000, guid: c8cfc2685d2648740883a5088f2cc4d3, type: 3}
