@@ -17,3 +17,4 @@ MonoBehaviour:
   tagBindings:
   - tag: Zone
     propertyIndex: 0
+  levelMusic: {fileID: 8300000, guid: 5905fb2a41c7f534ab9ae8d56ca04a90, type: 3}
