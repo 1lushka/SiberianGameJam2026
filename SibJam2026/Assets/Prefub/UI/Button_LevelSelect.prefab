@@ -301,7 +301,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041C\u043E\u043D\u0435\u0442\u044B \u043E\u0447\u0435\u043D\u044C \u0442\u044F\u0436\u0451\u043B\u044B\u0435"
+  m_text: "\u041E\u0431\u044B\u0447\u043D\u044B\u0439"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 828f963417b075a4eaab97de0d39638a, type: 2}
   m_sharedMaterial: {fileID: -5817891606233188159, guid: 828f963417b075a4eaab97de0d39638a, type: 2}
@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 1943115712712471884}
   - component: {fileID: 7851742645567557618}
   - component: {fileID: 6389351539248929171}
+  - component: {fileID: 310474751674394050}
   m_Layer: 5
   m_Name: Button_LevelSelect
   m_TagString: Untagged
@@ -540,3 +541,22 @@ MonoBehaviour:
   button: {fileID: 1943115712712471884}
   coinsText: {fileID: 0}
   lockIcon: {fileID: 0}
+--- !u!114 &310474751674394050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7708391486765542054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa288348e7ebe694f8b795072f9d4a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelSelectButtonLockController
+  buttonData: {fileID: 11400000, guid: 22849fb2e9e4f37458aa10e446620c1e, type: 2}
+  levelNode: {fileID: 6389351539248929171}
+  targetButton: {fileID: 1943115712712471884}
+  titleText: {fileID: 5097126390187147345}
+  lockVisual: {fileID: 3591698566041593734}
+  progressText: {fileID: 1866540399663296077}
+  destroyLockVisualWhenUnlocked: 1
