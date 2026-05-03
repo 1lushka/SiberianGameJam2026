@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Damage : MonoBehaviour
+public class Damage : BaseProperty
 {
     public int damageAmount = 1;
 

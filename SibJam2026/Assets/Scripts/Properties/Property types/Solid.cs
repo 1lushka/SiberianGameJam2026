@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Solid : MonoBehaviour
+public class Solid : BaseProperty
 {
     private Collider col;
 

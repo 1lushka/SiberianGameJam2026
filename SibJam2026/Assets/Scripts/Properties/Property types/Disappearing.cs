@@ -2,7 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using Unity.VisualScripting;
 
-public class Disappearing : MonoBehaviour
+public class Disappearing : BaseProperty
 {
     [Header("Настройки")]
     [Tooltip("Сколько секунд трястись")]

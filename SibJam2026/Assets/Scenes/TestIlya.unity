@@ -28804,15 +28804,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -25.587
       objectReference: {fileID: 0}
+    - target: {fileID: 7198588907479393220, guid: ae28347988497f342a83a0759a9c9653, type: 3}
+      propertyPath: propertyScripts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198588907479393220, guid: ae28347988497f342a83a0759a9c9653, type: 3}
+      propertyPath: 'propertyScripts.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6932935402376940274}
+    - target: {fileID: 7198588907479393220, guid: ae28347988497f342a83a0759a9c9653, type: 3}
+      propertyPath: 'propertyScripts.Array.data[1]'
+      value: 
+      objectReference: {fileID: 6932935402376940273}
     - target: {fileID: 8410337369553114854, guid: ae28347988497f342a83a0759a9c9653, type: 3}
       propertyPath: m_Name
       value: Bouncy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410337369553114854, guid: ae28347988497f342a83a0759a9c9653, type: 3}
+      propertyPath: m_TagString
+      value: Coin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae28347988497f342a83a0759a9c9653, type: 3}
+--- !u!114 &6932935402376940273 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3515076468989231380, guid: ae28347988497f342a83a0759a9c9653, type: 3}
+  m_PrefabInstance: {fileID: 6932935402376940272}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2b9e7f0e150174c80b8255a975415b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Solid
+--- !u!114 &6932935402376940274 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2456731494194087398, guid: ae28347988497f342a83a0759a9c9653, type: 3}
+  m_PrefabInstance: {fileID: 6932935402376940272}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d84c51db8e9e94292e750b92eadca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bouncy
 --- !u!1001 &7790421968064355259
 PrefabInstance:
   m_ObjectHideFlags: 0

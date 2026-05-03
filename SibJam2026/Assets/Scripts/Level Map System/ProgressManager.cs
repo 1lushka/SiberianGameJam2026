@@ -47,7 +47,6 @@ public class ProgressManager : MonoBehaviour
 
     public void UnlockNode(string levelId)
     {
-        // Если ключа ещё нет (новый уровень) – сразу делаем Unlocked
         if (!nodeStates.ContainsKey(levelId))
         {
             nodeStates[levelId] = LevelNode.NodeState.Unlocked;
@@ -57,7 +56,6 @@ public class ProgressManager : MonoBehaviour
             return;
         }
 
-        // Иначе разблокируем, только если он был Locked
         if (nodeStates[levelId] == LevelNode.NodeState.Locked)
         {
             nodeStates[levelId] = LevelNode.NodeState.Unlocked;

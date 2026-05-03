@@ -15,5 +15,5 @@ MonoBehaviour:
   levelID: 1
   isFinalLevel: 0
   tagBindings:
-  - tag: Ice
+  - tag: Coin
     propertyIndex: 0
