@@ -40,6 +40,11 @@ public class Disappearing : MonoBehaviour
             visualObject.transform.localScale = originalScale;
     }
 
+    private void OnDisable()
+    {
+        Destroy(this);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
@@ -61,6 +66,8 @@ public class Disappearing : MonoBehaviour
 
     private void StartDisappearing()
     {
+        if (isActiveAndEnabled == false)
+            return;
         DG.Tweening.Sequence seq = DOTween.Sequence();
 
         // Тряска
