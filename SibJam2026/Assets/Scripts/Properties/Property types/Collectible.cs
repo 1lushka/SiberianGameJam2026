@@ -1,5 +1,5 @@
-using UnityEngine.Events;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Collectible : MonoBehaviour
 {
@@ -8,6 +8,10 @@ public class Collectible : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
+
+        if (CoinCounter.Instance != null)
+            CoinCounter.Instance.AddCoin(1);
+
         onCollected?.Invoke();
         gameObject.SetActive(false);
     }

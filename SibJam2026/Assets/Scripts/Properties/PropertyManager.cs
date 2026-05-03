@@ -12,10 +12,10 @@ public class PropertyManager : MonoBehaviour
 
     void Start()
     {
-        SetActiveChild(startIndex);
+        SetPropertyIndex(startIndex);
     }
 
-    public void SetActiveChild(int index)
+    public void SetPropertyIndex(int index)
     {
         for (int i = 0; i < propertyChildren.Length; i++)
         {
@@ -31,7 +31,7 @@ public class PropertyManager : MonoBehaviour
         {
             if (propertyChildren[i] != null && propertyChildren[i].name == childName)
             {
-                SetActiveChild(i);
+                SetPropertyIndex(i);
                 return;
             }
         }
