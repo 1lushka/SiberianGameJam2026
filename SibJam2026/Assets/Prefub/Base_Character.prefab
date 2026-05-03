@@ -5397,6 +5397,7 @@ GameObject:
   - component: {fileID: 1411110720214444894}
   - component: {fileID: 5700032847415239911}
   - component: {fileID: 6722736412762474085}
+  - component: {fileID: 3336092081316535682}
   m_Layer: 0
   m_Name: Base_Character
   m_TagString: Player
@@ -5606,6 +5607,19 @@ MonoBehaviour:
   animator: {fileID: 0}
   useStrafeAnimations: 0
   landVelocityThreshold: 5
+--- !u!114 &3336092081316535682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221672173501980139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7f8c26a62e5e645a0c1c7b77e597b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AlignRigidbodyToTarget
+  target: {fileID: 0}
 --- !u!1001 &78363098969068894
 PrefabInstance:
   m_ObjectHideFlags: 0
