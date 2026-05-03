@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23569444298657216}
   - component: {fileID: 65885358166082618}
   - component: {fileID: 6590654591648329333}
-  - component: {fileID: 732970547829012612}
+  - component: {fileID: 8338912957928340093}
   m_Layer: 0
   m_Name: Cube_4x4x2
   m_TagString: Untagged
@@ -141,7 +141,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &732970547829012612
+--- !u!114 &8338912957928340093
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,11 +150,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1148055578383482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f162430758e31654a96ba9d4895d3c68, type: 3}
+  m_Script: {fileID: 11500000, guid: 01d84c51db8e9e94292e750b92eadca1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Disappearing
-  shakeDuration: 2
-  shakeStrength: 0.15
-  vibrato: 30
-  shrinkDuration: 0.4
-  delayBeforeShrink: 0
+  m_EditorClassIdentifier: Assembly-CSharp::Bouncy
+  bounceForce: 22

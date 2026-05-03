@@ -3,7 +3,17 @@ using UnityEngine;
 
 public class Bouncy : MonoBehaviour
 {
+    public enum BounceDirectionMode
+    {
+        ColliderNormal,
+        ObjectUp,
+        CustomTransformUp
+    }
+
     public float bounceForce = 10f;
+    [SerializeField] private BounceDirectionMode bounceDirectionMode = BounceDirectionMode.ColliderNormal;
+    [SerializeField] private Transform bounceDirectionReference;
+    [SerializeField] private bool preserveLateralMomentum = true;
     private Collider cachedBounceCollider;
 
     private void Awake()
@@ -27,9 +37,17 @@ public class Bouncy : MonoBehaviour
         Vector3 bounceDirection = GetBounceDirection(bounceCollider, playerPosition);
         Vector3 currentMomentum = controller.GetMomentum();
 
-        // Preserve sideways motion, but keep bounce speed along the hit side deterministic.
-        Vector3 lateralMomentum = Vector3.ProjectOnPlane(currentMomentum, bounceDirection);
-        controller.SetMomentum(lateralMomentum + bounceDirection * bounceForce);
+        if (preserveLateralMomentum)
+        {
+            // Keep sideways motion, but make the bounce speed along the launch direction deterministic.
+            Vector3 lateralMomentum = Vector3.ProjectOnPlane(currentMomentum, bounceDirection);
+            controller.SetMomentum(lateralMomentum + bounceDirection * bounceForce);
+        }
+        else
+        {
+            // Full override for consistent launch angle regardless of the incoming velocity.
+            controller.SetMomentum(bounceDirection * bounceForce);
+        }
 
         return true;
     }
@@ -65,6 +83,17 @@ public class Bouncy : MonoBehaviour
 
     private Vector3 GetBounceDirection(Collider bounceCollider, Vector3 playerPosition)
     {
+        switch (bounceDirectionMode)
+        {
+            case BounceDirectionMode.ObjectUp:
+                return transform.up.normalized;
+
+            case BounceDirectionMode.CustomTransformUp:
+                if (bounceDirectionReference != null)
+                    return bounceDirectionReference.up.normalized;
+                return transform.up.normalized;
+        }
+
         if (bounceCollider is BoxCollider boxCollider)
             return GetBoxBounceDirection(boxCollider, playerPosition);
 

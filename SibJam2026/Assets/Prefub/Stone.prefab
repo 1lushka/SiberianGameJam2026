@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 2234338801523174618}
   - component: {fileID: 8420319883703405646}
   - component: {fileID: 6622510221034903983}
-  - component: {fileID: 3974252582481086517}
   - component: {fileID: 6697172105266456198}
+  - component: {fileID: 5665024953752116041}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -146,23 +146,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &3974252582481086517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6857547100836692820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f162430758e31654a96ba9d4895d3c68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Disappearing
-  shakeDuration: 2
-  shakeStrength: 0.15
-  vibrato: 30
-  shrinkDuration: 0.4
-  delayBeforeShrink: 0
 --- !u!54 &6697172105266456198
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -190,3 +173,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5665024953752116041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6857547100836692820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d84c51db8e9e94292e750b92eadca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bouncy
+  bounceForce: 23

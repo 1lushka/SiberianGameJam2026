@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23787680175803614}
   - component: {fileID: 65196122031073594}
   - component: {fileID: 3807465986492341811}
-  - component: {fileID: 2907004964779132506}
+  - component: {fileID: 7955062906594196624}
   m_Layer: 0
   m_Name: Tile_16x16x2
   m_TagString: Untagged
@@ -141,7 +141,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2907004964779132506
+--- !u!114 &7955062906594196624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,11 +150,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1985475252292564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f162430758e31654a96ba9d4895d3c68, type: 3}
+  m_Script: {fileID: 11500000, guid: 01d84c51db8e9e94292e750b92eadca1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Disappearing
-  shakeDuration: 2
-  shakeStrength: 0.15
-  vibrato: 30
-  shrinkDuration: 0.4
-  delayBeforeShrink: 0
+  m_EditorClassIdentifier: Assembly-CSharp::Bouncy
+  bounceForce: 22
