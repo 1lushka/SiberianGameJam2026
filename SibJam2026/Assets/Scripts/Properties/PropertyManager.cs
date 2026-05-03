@@ -2,40 +2,49 @@ using UnityEngine;
 
 public class PropertyManager : MonoBehaviour
 {
-    [Tooltip("Скрипты свойств (Collectible, Bouncy, Damage, Solid, Slippery, Disappearing)")]
+    [Tooltip("Property scripts by index (Collectible, Bouncy, Damage, Solid, Slippery, Disappearing)")]
     public MonoBehaviour[] propertyScripts;
 
-    [Tooltip("Материалы для каждого свойства (по тому же индексу)")]
+    [Tooltip("Materials for each property, matched by the same index")]
     public Material[] propertyMaterials;
 
-    //public int startIndex = 0;
+    private Renderer targetRenderer;
 
-    private MeshRenderer meshRenderer;
-
-    void Start()
+    void Awake()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        //SetPropertyIndex(startIndex);
+        CacheRenderer();
+    }
+
+    private void CacheRenderer()
+    {
+        if (targetRenderer != null)
+            return;
+
+        targetRenderer = GetComponent<Renderer>();
+        if (targetRenderer == null)
+            targetRenderer = GetComponentInChildren<Renderer>(true);
     }
 
     /// <summary>
-    /// Включает скрипт с указанным индексом, остальные отключает. Меняет материал.
+    /// Enables the property script with the given index, disables the others, and swaps the material.
     /// </summary>
     public void SetPropertyIndex(int index)
     {
-        // Выключаем все скрипты
+        CacheRenderer();
+
+        // Disable all property scripts first.
         for (int i = 0; i < propertyScripts.Length; i++)
         {
             if (propertyScripts[i] != null)
                 propertyScripts[i].enabled = false;
         }
 
-        // Включаем нужный
+        // Then enable the selected one.
         if (index >= 0 && index < propertyScripts.Length && propertyScripts[index] != null)
             propertyScripts[index].enabled = true;
 
-        // Меняем материал
-        if (meshRenderer != null && propertyMaterials != null && index >= 0 && index < propertyMaterials.Length)
-            meshRenderer.material = propertyMaterials[index];
+        // Swap the material after the renderer is cached.
+        if (targetRenderer != null && propertyMaterials != null && index >= 0 && index < propertyMaterials.Length)
+            targetRenderer.material = propertyMaterials[index];
     }
 }
