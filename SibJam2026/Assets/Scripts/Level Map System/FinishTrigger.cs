@@ -11,31 +11,47 @@ public class FinishTrigger : MonoBehaviour
     public static void SetLevelsToUnlock(string[] ids)
     {
         levelsToUnlockOnFinish.Clear();
-        if (ids != null) levelsToUnlockOnFinish.AddRange(ids);
-        Debug.Log($"[FinishTrigger] Сохранены ID для открытия: {string.Join(", ", levelsToUnlockOnFinish)}");
+        if (ids != null)
+            levelsToUnlockOnFinish.AddRange(ids);
+
+        Debug.Log($"[FinishTrigger] Saved IDs to unlock: {string.Join(", ", levelsToUnlockOnFinish)}");
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.CompareTag("Player"))
+            return;
 
-        string levelId = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        string levelId = ResolveCompletedLevelId();
         int coins = CoinCounter.Instance != null ? CoinCounter.Instance.Coins : 0;
         ProgressManager.Instance.LevelCompleted(levelId, coins);
-        Debug.Log($"[FinishTrigger] Уровень '{levelId}' пройден, монет: {coins}");
+        Debug.Log($"[FinishTrigger] Level '{levelId}' completed, coins: {coins}");
 
-        Debug.Log($"[FinishTrigger] Открываю уровни: {string.Join(", ", levelsToUnlockOnFinish)}");
+        Debug.Log($"[FinishTrigger] Unlocking levels: {string.Join(", ", levelsToUnlockOnFinish)}");
         foreach (string id in levelsToUnlockOnFinish)
         {
             ProgressManager.Instance.UnlockNode(id);
             var newState = ProgressManager.Instance.GetState(id);
-            Debug.Log($"[FinishTrigger] После UnlockNode('{id}') состояние = {newState}");
+            Debug.Log($"[FinishTrigger] After UnlockNode('{id}') state = {newState}");
         }
 
-        bool isFinal = LevelInitializer.Instance.CurrentConfig != null
+        bool isFinal = LevelInitializer.Instance != null &&
+                       LevelInitializer.Instance.CurrentConfig != null
                        && LevelInitializer.Instance.CurrentConfig.isFinalLevel;
         string nextScene = isFinal ? victorySceneName : mapSceneName;
-        Debug.Log($"[FinishTrigger] Загружаю сцену '{nextScene}'");
+        Debug.Log($"[FinishTrigger] Loading scene '{nextScene}'");
         UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
+    }
+
+    private string ResolveCompletedLevelId()
+    {
+        if (LevelInitializer.Instance != null &&
+            LevelInitializer.Instance.CurrentConfig != null &&
+            !string.IsNullOrWhiteSpace(LevelInitializer.Instance.CurrentConfig.levelID))
+        {
+            return LevelInitializer.Instance.CurrentConfig.levelID;
+        }
+
+        return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
     }
 }

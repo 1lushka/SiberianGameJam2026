@@ -178,6 +178,8 @@ MonoBehaviour:
   vibrato: 30
   shrinkDuration: 0.4
   delayBeforeShrink: 0
+  shakeSounds: []
+  shrinkSounds: []
 --- !u!114 &5253116314650182310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,4 +212,4 @@ MonoBehaviour:
   propertyMaterials:
   - {fileID: 2100000, guid: 4edb9a5d79450df46907d85b121de43a, type: 2}
   - {fileID: 2100000, guid: c125703bcde20df498b1774978d7e909, type: 2}
-  - {fileID: 2100000, guid: 2f41867eb977bc44d8c97845bc279103, type: 2}
+  - {fileID: 2100000, guid: db758bf15d135a44ab67c34e578a4072, type: 2}
