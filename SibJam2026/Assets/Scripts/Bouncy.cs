@@ -23,6 +23,8 @@ public class Bouncy : MonoBehaviour
 
     public bool TriggerBounce(AdvancedWalkerController controller, Collider playerCollider)
     {
+        if (isActiveAndEnabled == false)
+            return false;
         if (controller == null)
             return false;
 
