@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -2226031305935430476}
   m_Layer: 0
   m_Name: Ramp_4x4x1
-  m_TagString: Untagged
+  m_TagString: LevelObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,4 +208,3 @@ MonoBehaviour:
   - {fileID: 7266942197648214062, guid: 7d931555e87222947a8181fc81cabd1e, type: 3}
   - {fileID: 5253116314650182310, guid: 7d931555e87222947a8181fc81cabd1e, type: 3}
   propertyMaterials: []
-  startIndex: 0

@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -4784495663468620818}
   m_Layer: 0
   m_Name: Tile_16x16x2
-  m_TagString: Wall
+  m_TagString: LevelObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,4 +207,3 @@ MonoBehaviour:
   - {fileID: 7266942197648214062}
   - {fileID: 5253116314650182310}
   propertyMaterials: []
-  startIndex: 0
