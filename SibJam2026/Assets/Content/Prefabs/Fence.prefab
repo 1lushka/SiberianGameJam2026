@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0e11df15f39b8044ca2eb48b92d67745, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2fec038e32c93f94382a39f3901cd6b7, type: 2}
     - target: {fileID: 919132149155446097, guid: 0e11df15f39b8044ca2eb48b92d67745, type: 3}
       propertyPath: m_Name
       value: Fence
@@ -152,8 +156,6 @@ MonoBehaviour:
   vibrato: 30
   shrinkDuration: 0.4
   delayBeforeShrink: 0
-  shakeSounds: []
-  shrinkSounds: []
 --- !u!114 &-7496057570228796779
 MonoBehaviour:
   m_ObjectHideFlags: 0
