@@ -5657,6 +5657,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d1ed6d3b35859d0408a87aa5d54a498b, type: 3}
   - {fileID: 8300000, guid: 590c811c34587de4597a43b27501d5a2, type: 3}
   - {fileID: 8300000, guid: 8ddb22bf4b61a1f4080c672bc7a59fc8, type: 3}
+  bounceClips:
+  - {fileID: 8300000, guid: 259662f3589ac5543a69dccffe9f6fdf, type: 3}
+  - {fileID: 8300000, guid: 38ebdabe3dc7b8d438ecdbfcb0b25237, type: 3}
+  - {fileID: 8300000, guid: f04efbc9ded1d9542ad45884ad1279c5, type: 3}
 --- !u!82 &8079735819374370837
 AudioSource:
   m_ObjectHideFlags: 0

@@ -1954,6 +1954,10 @@ PrefabInstance:
       propertyPath: levelConfig
       value: 
       objectReference: {fileID: 11400000, guid: ba410c875f7251749b05f578a69907e2, type: 2}
+    - target: {fileID: 6389351539248929171, guid: ed89b28b8c551c54c95a2ec9013bc91b, type: 3}
+      propertyPath: levelsToUnlock.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7708391486765542054, guid: ed89b28b8c551c54c95a2ec9013bc91b, type: 3}
       propertyPath: m_Name
       value: v1

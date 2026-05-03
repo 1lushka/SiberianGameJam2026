@@ -1,27 +1,20 @@
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting;
 
 public class Disappearing : BaseProperty
 {
-    [Header("Настройки")]
-    [Tooltip("Сколько секунд трястись")]
+    [Header("Настройки анимации")]
     public float shakeDuration = 0.8f;
-
-    [Tooltip("Сила тряски")]
     public float shakeStrength = 0.15f;
-
-    [Tooltip("Насколько сильно дрожать (вибрато)")]
     public int vibrato = 30;
-
-    [Tooltip("Сколько секунд сжиматься")]
     public float shrinkDuration = 0.4f;
-
-    [Tooltip("Задержка перед сжатием после тряски")]
     public float delayBeforeShrink = 0.1f;
 
-    private GameObject visualObject;
+    [Header("Звуки")]
+    public AudioClip[] shakeSounds;   
+    public AudioClip[] shrinkSounds;  
 
+    private GameObject visualObject;
     private Vector3 originalScale;
     private bool triggered;
 
@@ -29,7 +22,6 @@ public class Disappearing : BaseProperty
     {
         if (visualObject == null)
             visualObject = gameObject;
-
         originalScale = visualObject.transform.localScale;
     }
 
@@ -40,20 +32,11 @@ public class Disappearing : BaseProperty
             visualObject.transform.localScale = originalScale;
     }
 
-    private void OnDisable()
-    {
-       // Destroy(this);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        print("asdas");
-        /*if (triggered) return;
-
-        
-        triggered = true;
-        StartDisappearing();*/
+        // Твой вызов (раскомментируй если нужно)
+        // TriggerDisappearance();
     }
 
     public void TriggerDisappearance()
@@ -63,30 +46,33 @@ public class Disappearing : BaseProperty
         StartDisappearing();
     }
 
-
     private void StartDisappearing()
     {
-        if (isActiveAndEnabled == false)
-            return;
-        DG.Tweening.Sequence seq = DOTween.Sequence();
+        if (!isActiveAndEnabled) return;
 
-        // Тряска
+        PlayRandomSound(shakeSounds);
+
+        Sequence seq = DOTween.Sequence();
+
         seq.Append(visualObject.transform.DOShakePosition(shakeDuration, shakeStrength, vibrato));
 
-        // Небольшая пауза
         seq.AppendInterval(delayBeforeShrink);
 
-        // Сжатие до нуля
+        seq.AppendCallback(() => PlayRandomSound(shrinkSounds));
+
         seq.Append(visualObject.transform.DOScale(Vector3.zero, shrinkDuration).SetEase(Ease.InBack));
 
-        // Отключаем объект в конце
-        seq.OnComplete(() =>
-        {
-            visualObject.SetActive(false);
-        });
+        seq.OnComplete(() => visualObject.SetActive(false));
     }
 
-    // Публичный метод для сброса (вызови при рестарте уровня)
+    private void PlayRandomSound(AudioClip[] clips)
+    {
+        if (clips == null || clips.Length == 0) return;
+        AudioClip clip = clips[Random.Range(0, clips.Length)];
+        if (clip != null)
+            AudioSource.PlayClipAtPoint(clip, visualObject.transform.position);
+    }
+
     public void ResetObject()
     {
         triggered = false;

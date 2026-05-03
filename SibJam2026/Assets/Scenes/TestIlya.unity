@@ -43241,6 +43241,50 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: bounceClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'bounceClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 259662f3589ac5543a69dccffe9f6fdf, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'bounceClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 38ebdabe3dc7b8d438ecdbfcb0b25237, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'bounceClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f04efbc9ded1d9542ad45884ad1279c5, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: ledgeClimbClips.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'ledgeClimbClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a8353133e25f4b1449fd976cc28f22da, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'ledgeClimbClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 664980617e6922c429b07afdf3a72ef5, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'ledgeClimbClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'ledgeClimbClips.Array.data[3]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'ledgeClimbClips.Array.data[4]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'ledgeClimbClips.Array.data[5]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9221672173501980139, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
       propertyPath: m_Name
       value: ThirdPersonWalker_B (1)

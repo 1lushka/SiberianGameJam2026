@@ -38,13 +38,22 @@ namespace CMF
 		//Footstep audio clips will be played at different volumes for a more "natural sounding" result;
 		public float relativeRandomizedVolumeRange = 0.2f;
 
-		//Audio clips;
-		public AudioClip[] footStepClips;
+        [Header("Ledge Climb")]
+        public float ledgeClimbDistance = 0.25f;                     
+        private float ledgeClimbDistanceCounter;
+
+        //Audio clips;
+        public AudioClip[] footStepClips;
 		public AudioClip[] jumpClips;
 		public AudioClip[] landClips;
+        public AudioClip[] bounceClips;
+        public AudioClip[] ledgeClimbClips;
 
-		//Setup;
-		void Start () {
+        public bool isLedgeClimbing { get; set; }
+        public Vector3 ledgeMoveVelocity { get; set; }
+
+        //Setup;
+        void Start () {
 			//Get component references;
 			controller = GetComponent<Controller>();
 			animator = GetComponentInChildren<Animator>();
@@ -69,7 +78,8 @@ namespace CMF
 			Vector3 _horizontalVelocity = VectorMath.RemoveDotVector(_velocity, tr.up);
 
 			FootStepUpdate(_horizontalVelocity.magnitude);
-		}
+            LedgeClimbUpdate();
+        }
 
 		void FootStepUpdate(float _movementSpeed)
 		{
@@ -103,6 +113,30 @@ namespace CMF
 				}
 			}
 		}
+
+        void LedgeClimbUpdate()
+        {
+            if (!isLedgeClimbing)
+            {
+                // Если не висим – сбрасываем счётчик
+                ledgeClimbDistanceCounter = 0f;
+                return;
+            }
+
+            float _speed = ledgeMoveVelocity.magnitude;
+            float _speedThreshold = 0.05f;
+            if (_speed <= _speedThreshold)
+                return;
+
+            // Накапливаем расстояние (как в шагах, когда useAnimationBasedFootsteps = false)
+            ledgeClimbDistanceCounter += Time.deltaTime * _speed;
+
+            if (ledgeClimbDistanceCounter >= ledgeClimbDistance)
+            {
+                PlayLedgeClimbSound();
+                ledgeClimbDistanceCounter = 0f;
+            }
+        }
 
         public void PlayFootstepSound(float _movementSpeed)
 		{
@@ -144,6 +178,16 @@ namespace CMF
 			audioSource.PlayOneShot(_clip, _volume);
 			audioSource.pitch = 1f;
 		}
-	}
+
+        public void PlayBounceSound()
+        {
+            PlayRandomClip(bounceClips, audioClipVolume);
+        }
+
+        public void PlayLedgeClimbSound()
+        {
+            PlayRandomClip(ledgeClimbClips, audioClipVolume);
+        }
+    }
 }
 
