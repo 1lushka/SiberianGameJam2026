@@ -1376,6 +1376,10 @@ MonoBehaviour:
   quitButton: {fileID: 0}
   settingsPanel: {fileID: 979207542}
   backButton: {fileID: 1482109475}
+  soundSlider: {fileID: 861811762}
+  musicSlider: {fileID: 1930129962}
+  invertMouseXToggle: {fileID: 1723200773}
+  invertMouseYToggle: {fileID: 1205060077}
   gameSceneName: UI_LevelSelect
 --- !u!1 &186743049
 GameObject:
