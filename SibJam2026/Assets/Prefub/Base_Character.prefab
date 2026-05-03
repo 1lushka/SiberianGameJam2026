@@ -5445,7 +5445,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1.8
+  m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!114 &6381163332878485009
@@ -5641,6 +5641,7 @@ MonoBehaviour:
   audioClipVolume: 0.2
   randomPitchRange: 0.05
   relativeRandomizedVolumeRange: 0.2
+  ledgeClimbDistance: 0.25
   footStepClips:
   - {fileID: 8300000, guid: ac41dc5872d4c9242aaa2b7ee83c9ba1, type: 3}
   - {fileID: 8300000, guid: bf28df9739abab140ae38293934178f5, type: 3}
@@ -5661,6 +5662,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 259662f3589ac5543a69dccffe9f6fdf, type: 3}
   - {fileID: 8300000, guid: 38ebdabe3dc7b8d438ecdbfcb0b25237, type: 3}
   - {fileID: 8300000, guid: f04efbc9ded1d9542ad45884ad1279c5, type: 3}
+  ledgeClimbClips: []
+  shakeClips:
+  - {fileID: 8300000, guid: 0564216ccb7eb1f4abb1151ad603941d, type: 3}
+  - {fileID: 8300000, guid: 9d9cc4b84957367498b7349fe90596fc, type: 3}
+  - {fileID: 8300000, guid: 40772fb6f748e9d45a8cff5038c512fc, type: 3}
+  shrinkClips:
+  - {fileID: 8300000, guid: 1f2d609dcc7723d41891a89fa08ab062, type: 3}
+  platformSoundVolume: 0.4
 --- !u!82 &8079735819374370837
 AudioSource:
   m_ObjectHideFlags: 0
