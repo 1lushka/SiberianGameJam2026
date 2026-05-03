@@ -18,7 +18,7 @@ MonoBehaviour:
   airControlRate: 0.1
   airFriction: 2
   jumpSpeed: 7
-  jumpDuration: 0.3
+  jumpDuration: 0.25
   jumpBufferDuration: 0.2
   coyoteTimeDuration: 0.3
   groundFriction: 150
