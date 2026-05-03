@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4032957638190429172}
   - component: {fileID: 6640965302672286575}
   - component: {fileID: 2628303621937576471}
+  - component: {fileID: 1266072240139068823}
   m_Layer: 0
   m_Name: MovingPlatform (1)
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,12 +113,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099779126829920241}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01d84c51db8e9e94292e750b92eadca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bouncy
   bounceForce: 23
+  bounceDirectionMode: 0
+  bounceDirectionReference: {fileID: 0}
+  preserveLateralMomentum: 1
+--- !u!114 &1266072240139068823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099779126829920241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3575731cc51f57f4e8dc767f63770f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
+  propertyScripts:
+  - {fileID: 2628303621937576471}
+  propertyMaterials: []
 --- !u!1 &2360164811527491512
 GameObject:
   m_ObjectHideFlags: 0

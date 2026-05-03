@@ -15,5 +15,5 @@ MonoBehaviour:
   levelID: 2
   isFinalLevel: 0
   tagBindings:
-  - tag: Money
-    propertyIndex: 1
+  - tag: Coin
+    propertyIndex: 0
