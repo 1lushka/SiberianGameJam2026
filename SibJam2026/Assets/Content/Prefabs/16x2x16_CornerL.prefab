@@ -14,11 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f0a1e2bc0850964584f64f2fdbd26b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.9999676
+      value: 22.999998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f0a1e2bc0850964584f64f2fdbd26b6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -32.95577
+      value: -16.955769
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f0a1e2bc0850964584f64f2fdbd26b6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -71,6 +71,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f0a1e2bc0850964584f64f2fdbd26b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7779172732618324283}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f0a1e2bc0850964584f64f2fdbd26b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7158895802348079297}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f0a1e2bc0850964584f64f2fdbd26b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5665582278359311581}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f0a1e2bc0850964584f64f2fdbd26b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2639755423479560135}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f0a1e2bc0850964584f64f2fdbd26b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1841801461536589643}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f0a1e2bc0850964584f64f2fdbd26b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8315679798418488787}
   m_SourcePrefab: {fileID: 100100000, guid: 7f0a1e2bc0850964584f64f2fdbd26b6, type: 3}
 --- !u!1 &8914421601076639580 stripped
 GameObject:
@@ -98,3 +113,93 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 16, y: 16, z: 2}
   m_Center: {x: 0, y: -8, z: 1}
+--- !u!54 &7158895802348079297
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914421601076639580}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &5665582278359311581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914421601076639580}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d84c51db8e9e94292e750b92eadca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bouncy
+  bounceForce: 22
+  bounceDirectionMode: 0
+  bounceDirectionReference: {fileID: 0}
+  preserveLateralMomentum: 1
+--- !u!114 &2639755423479560135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914421601076639580}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f162430758e31654a96ba9d4895d3c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Disappearing
+  shakeDuration: 2
+  shakeStrength: 0.15
+  vibrato: 30
+  shrinkDuration: 0.4
+  delayBeforeShrink: 0
+--- !u!114 &1841801461536589643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914421601076639580}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c538d376174018b2339f8f12c59730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlipperySurface
+  movementPresetOverride: {fileID: 11400000, guid: 6af1d2c4e98b4e3a91c7f0b25d6e4831, type: 2}
+--- !u!114 &8315679798418488787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914421601076639580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3575731cc51f57f4e8dc767f63770f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
+  propertyScripts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  propertyMaterials: []

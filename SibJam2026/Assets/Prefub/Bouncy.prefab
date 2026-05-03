@@ -75,6 +75,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bouncy
   bounceForce: 30
+  bounceDirectionMode: 0
+  bounceDirectionReference: {fileID: 0}
+  preserveLateralMomentum: 1
 --- !u!65 &2495219939749206614
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -163,7 +166,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 4edb9a5d79450df46907d85b121de43a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -275,7 +278,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 96557566ed4fe544d98ad446d3f2ac2c, type: 2}
+  - {fileID: 2100000, guid: 4edb9a5d79450df46907d85b121de43a, type: 2}
+  - {fileID: 2100000, guid: 04fa6a250ef1f3647bdd58ba984f3907, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -366,10 +370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3575731cc51f57f4e8dc767f63770f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
-  propertyChildren:
-  - {fileID: 3199563564377250023}
-  - {fileID: 8883731285481716917}
-  startIndex: 0
+  propertyScripts: []
+  propertyMaterials: []
 --- !u!1 &8883731285481716917
 GameObject:
   m_ObjectHideFlags: 0
