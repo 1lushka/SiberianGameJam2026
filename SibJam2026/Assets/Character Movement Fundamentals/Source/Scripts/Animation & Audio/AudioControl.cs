@@ -7,8 +7,10 @@ namespace CMF
 	//This script handles and plays audio cues like footsteps, jump and land audio clips based on character movement speed and events; 
 	public class AudioControl : MonoBehaviour {
 
-		//References to components;
-		Controller controller;
+
+        public static AudioControl Instance { get; private set; }
+        //References to components;
+        Controller controller;
 		Animator animator;
 		Mover mover;
 		Transform tr;
@@ -49,10 +51,26 @@ namespace CMF
         public AudioClip[] bounceClips;
         public AudioClip[] ledgeClimbClips;
 
+        [Header("Disappearing Platforms")]
+        public AudioClip[] shakeClips;
+        public AudioClip[] shrinkClips;
+        [Header("Platform Volume")]
+        [Range(0f, 1f)]
+        public float platformSoundVolume = 0.4f;
+
         public bool isLedgeClimbing { get; set; }
         public Vector3 ledgeMoveVelocity { get; set; }
 
         //Setup;
+
+        void Awake()
+        {
+            // Синглтон (если ещё не настроен)
+            if (Instance == null)
+                Instance = this;
+            else
+                Destroy(gameObject);
+        }
         void Start () {
 			//Get component references;
 			controller = GetComponent<Controller>();
@@ -187,6 +205,34 @@ namespace CMF
         public void PlayLedgeClimbSound()
         {
             PlayRandomClip(ledgeClimbClips, audioClipVolume);
+        }
+
+        private void PlayRandomAtPoint(AudioClip[] clips, Vector3 position, float volume)
+        {
+            if (clips == null || clips.Length == 0) return;
+            AudioClip clip = clips[Random.Range(0, clips.Length)];
+            if (clip != null)
+            {
+                // Создаём временный AudioSource, чтобы задать громкость
+                GameObject tempGO = new GameObject("TempPlatformSound");
+                tempGO.transform.position = position;
+                AudioSource tempSource = tempGO.AddComponent<AudioSource>();
+                tempSource.clip = clip;
+                tempSource.volume = volume;
+                tempSource.spatialBlend = 1f;   // 3D-звук
+                tempSource.Play();
+                Destroy(tempGO, clip.length);
+            }
+        }
+
+        public void PlayShakeSound(Vector3 position)
+        {
+            PlayRandomAtPoint(shakeClips, position, platformSoundVolume);
+        }
+
+        public void PlayShrinkSound(Vector3 position)
+        {
+            PlayRandomAtPoint(shrinkClips, position, platformSoundVolume);
         }
     }
 }
