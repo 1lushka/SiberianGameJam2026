@@ -207,4 +207,7 @@ MonoBehaviour:
   - {fileID: -8072567487076871207}
   - {fileID: -5214865803607140905}
   - {fileID: -5320838036970186320}
-  propertyMaterials: []
+  propertyMaterials:
+  - {fileID: 2100000, guid: 4edb9a5d79450df46907d85b121de43a, type: 2}
+  - {fileID: 2100000, guid: c125703bcde20df498b1774978d7e909, type: 2}
+  - {fileID: 2100000, guid: 2f41867eb977bc44d8c97845bc279103, type: 2}

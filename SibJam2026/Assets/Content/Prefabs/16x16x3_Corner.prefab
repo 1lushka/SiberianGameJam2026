@@ -1407,6 +1407,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -1031697683368169644, guid: 4e7c96bc5162485468ed0af65863db22, type: 3}
+    - target: {fileID: 4423901347868486821, guid: 06b19663fcba3e64294ea1181dd949a8, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 8553503770892767672, guid: 06b19663fcba3e64294ea1181dd949a8, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1436,6 +1440,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 06b19663fcba3e64294ea1181dd949a8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7860911082985162870}
+    - targetCorrespondingSourceObject: {fileID: 4423901347868486821, guid: 06b19663fcba3e64294ea1181dd949a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5193500057269922872}
   m_SourcePrefab: {fileID: 100100000, guid: 06b19663fcba3e64294ea1181dd949a8, type: 3}
 --- !u!4 &6140403715246060146 stripped
 Transform:
@@ -1557,6 +1564,28 @@ MonoBehaviour:
   - {fileID: 3368370330887423086}
   - {fileID: 2000081638410740037}
   - {fileID: 1259036614188911675}
+  propertyMaterials:
+  - {fileID: 2100000, guid: 4edb9a5d79450df46907d85b121de43a, type: 2}
+  - {fileID: 2100000, guid: c125703bcde20df498b1774978d7e909, type: 2}
+  - {fileID: 2100000, guid: 2f41867eb977bc44d8c97845bc279103, type: 2}
+--- !u!1 &8059608309945415996 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4423901347868486821, guid: 06b19663fcba3e64294ea1181dd949a8, type: 3}
+  m_PrefabInstance: {fileID: 5962099431565661593}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5193500057269922872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059608309945415996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3575731cc51f57f4e8dc767f63770f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
+  propertyScripts: []
   propertyMaterials:
   - {fileID: 2100000, guid: 4edb9a5d79450df46907d85b121de43a, type: 2}
   - {fileID: 2100000, guid: c125703bcde20df498b1774978d7e909, type: 2}

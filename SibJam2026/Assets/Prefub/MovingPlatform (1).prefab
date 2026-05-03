@@ -136,7 +136,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
   propertyScripts:
   - {fileID: 2628303621937576471}
-  propertyMaterials: []
+  propertyMaterials:
+  - {fileID: 2100000, guid: 4edb9a5d79450df46907d85b121de43a, type: 2}
 --- !u!1 &2360164811527491512
 GameObject:
   m_ObjectHideFlags: 0
