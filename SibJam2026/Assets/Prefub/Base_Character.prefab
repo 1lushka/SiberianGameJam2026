@@ -5445,7 +5445,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1.5
+  m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!114 &6381163332878485009
@@ -5637,7 +5637,7 @@ MonoBehaviour:
   audioSource: {fileID: 8079735819374370837}
   useAnimationBasedFootsteps: 0
   landVelocityThreshold: 1
-  footstepDistance: 1
+  footstepDistance: 2
   audioClipVolume: 0.2
   randomPitchRange: 0.05
   relativeRandomizedVolumeRange: 0.2
