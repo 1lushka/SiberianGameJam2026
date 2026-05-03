@@ -556,7 +556,9 @@ MonoBehaviour:
   buttonData: {fileID: 11400000, guid: 22849fb2e9e4f37458aa10e446620c1e, type: 2}
   levelNode: {fileID: 6389351539248929171}
   targetButton: {fileID: 1943115712712471884}
+  targetImage: {fileID: 571916047204927856}
   titleText: {fileID: 5097126390187147345}
   lockVisual: {fileID: 3591698566041593734}
   progressText: {fileID: 1866540399663296077}
   destroyLockVisualWhenUnlocked: 1
+  completedColor: {r: 0.6666667, g: 1, b: 0.65882355, a: 1}

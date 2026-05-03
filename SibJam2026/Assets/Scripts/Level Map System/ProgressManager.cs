@@ -1,18 +1,20 @@
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class ProgressManager : MonoBehaviour
 {
     public static ProgressManager Instance { get; private set; }
 
-    const string PROGRESS_KEY = "MapProgress";
-    Dictionary<string, LevelNode.NodeState> nodeStates;
-    Dictionary<string, int> coinCounts;
+    private const string PROGRESS_KEY = "MapProgress";
+
+    private Dictionary<string, LevelNode.NodeState> nodeStates;
+    private Dictionary<string, int> coinCounts;
 
     public System.Action OnProgressChanged;
     public LevelConfiguration CurrentLevelConfig { get; set; }
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -20,7 +22,10 @@ public class ProgressManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             Load();
         }
-        else Destroy(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void LevelCompleted(string levelId, int coinsCollected)
@@ -28,15 +33,20 @@ public class ProgressManager : MonoBehaviour
         nodeStates[levelId] = LevelNode.NodeState.Completed;
         if (coinCounts.ContainsKey(levelId))
             coinCounts[levelId] = Mathf.Max(coinCounts[levelId], coinsCollected);
-        else coinCounts[levelId] = coinsCollected;
+        else
+            coinCounts[levelId] = coinsCollected;
 
         Save();
+        Debug.Log($"[ProgressManager] Level '{levelId}' marked Completed. Coins={GetCoins(levelId)}. CompletedCount={GetCompletedLevelCount()}.");
+        Debug.Log(GetDebugSummary());
         OnProgressChanged?.Invoke();
     }
 
     public LevelNode.NodeState GetState(string levelId)
     {
-        if (nodeStates.ContainsKey(levelId)) return nodeStates[levelId];
+        if (nodeStates.ContainsKey(levelId))
+            return nodeStates[levelId];
+
         return LevelNode.NodeState.Locked;
     }
 
@@ -52,7 +62,7 @@ public class ProgressManager : MonoBehaviour
             nodeStates[levelId] = LevelNode.NodeState.Unlocked;
             Save();
             OnProgressChanged?.Invoke();
-            Debug.Log($"[ProgressManager] Новый узел '{levelId}' добавлен как Unlocked.");
+            Debug.Log($"[ProgressManager] New node '{levelId}' added as Unlocked.");
             return;
         }
 
@@ -61,34 +71,104 @@ public class ProgressManager : MonoBehaviour
             nodeStates[levelId] = LevelNode.NodeState.Unlocked;
             Save();
             OnProgressChanged?.Invoke();
-            Debug.Log($"[ProgressManager] Узел '{levelId}' разблокирован.");
+            Debug.Log($"[ProgressManager] Node '{levelId}' unlocked.");
         }
     }
 
-    void Save()
+    public int GetCompletedLevelCount()
+    {
+        int count = 0;
+        foreach (var pair in nodeStates)
+        {
+            if (pair.Value == LevelNode.NodeState.Completed)
+                count++;
+        }
+
+        return count;
+    }
+
+    public List<string> GetCompletedLevelIds()
+    {
+        List<string> completedIds = new List<string>();
+        foreach (var pair in nodeStates)
+        {
+            if (pair.Value == LevelNode.NodeState.Completed)
+                completedIds.Add(pair.Key);
+        }
+
+        completedIds.Sort();
+        return completedIds;
+    }
+
+    public string GetDebugSummary()
+    {
+        StringBuilder builder = new StringBuilder();
+        List<string> completedIds = GetCompletedLevelIds();
+
+        builder.AppendLine("[ProgressManager] Progress debug summary");
+        builder.AppendLine($"Completed count: {completedIds.Count}");
+        builder.AppendLine(completedIds.Count > 0
+            ? $"Completed IDs: {string.Join(", ", completedIds)}"
+            : "Completed IDs: <empty>");
+
+        if (nodeStates.Count > 0)
+        {
+            builder.AppendLine("All node states:");
+            foreach (var pair in nodeStates)
+                builder.AppendLine($"- {pair.Key}: {pair.Value}");
+        }
+        else
+        {
+            builder.AppendLine("All node states: <empty>");
+        }
+
+        return builder.ToString();
+    }
+
+    public void LogDebugSummary()
+    {
+        Debug.Log(GetDebugSummary());
+    }
+
+    public void ClearAllProgress()
+    {
+        nodeStates.Clear();
+        coinCounts.Clear();
+
+        PlayerPrefs.DeleteKey(PROGRESS_KEY);
+        PlayerPrefs.Save();
+
+        CompletedLevelsRegistry.ClearCache();
+        Debug.Log("[ProgressManager] Progress cleared. MapProgress save deleted.");
+        OnProgressChanged?.Invoke();
+    }
+
+    private void Save()
     {
         ProgressData data = new ProgressData(nodeStates, coinCounts);
         PlayerPrefs.SetString(PROGRESS_KEY, JsonUtility.ToJson(data));
         PlayerPrefs.Save();
     }
 
-    void Load()
+    private void Load()
     {
         if (PlayerPrefs.HasKey(PROGRESS_KEY))
         {
             ProgressData data = JsonUtility.FromJson<ProgressData>(PlayerPrefs.GetString(PROGRESS_KEY));
             nodeStates = data.ToStateDictionary();
             coinCounts = data.ToCoinDictionary();
+            Debug.Log($"[ProgressManager] Progress loaded. CompletedCount={GetCompletedLevelCount()}.");
         }
         else
         {
             nodeStates = new Dictionary<string, LevelNode.NodeState>();
             coinCounts = new Dictionary<string, int>();
+            Debug.Log("[ProgressManager] No saved progress found.");
         }
     }
 
     [System.Serializable]
-    class ProgressData
+    private class ProgressData
     {
         public List<string> levelIds;
         public List<int> states;
@@ -99,11 +179,13 @@ public class ProgressManager : MonoBehaviour
         {
             levelIds = new List<string>(stateDict.Keys);
             states = new List<int>();
-            foreach (var id in levelIds) states.Add((int)stateDict[id]);
+            foreach (var id in levelIds)
+                states.Add((int)stateDict[id]);
 
             coinIds = new List<string>(coinDict.Keys);
             coins = new List<int>();
-            foreach (var id in coinIds) coins.Add(coinDict[id]);
+            foreach (var id in coinIds)
+                coins.Add(coinDict[id]);
         }
 
         public Dictionary<string, LevelNode.NodeState> ToStateDictionary()
