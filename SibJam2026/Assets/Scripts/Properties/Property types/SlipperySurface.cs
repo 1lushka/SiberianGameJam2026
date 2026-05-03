@@ -6,6 +6,6 @@ public class SlipperySurface : BaseProperty
 	public CharacterMovementPreset movementPresetOverride;
     private void OnDisable()
     {
-        Destroy(this);
+        //Destroy(this);
     }
 }

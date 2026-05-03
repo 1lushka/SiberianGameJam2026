@@ -42,7 +42,7 @@ public class Disappearing : BaseProperty
 
     private void OnDisable()
     {
-        Destroy(this);
+       // Destroy(this);
     }
 
     private void OnTriggerEnter(Collider other)

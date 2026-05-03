@@ -2207,6 +2207,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 16x16x20_Island
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 68d044eb2da7a8d45b4288cdd49c269e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -2345,9 +2349,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
   propertyScripts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 9137330363017088286}
+  - {fileID: 26854190704800790}
+  - {fileID: 8168357762977303960}
   propertyMaterials: []
 --- !u!4 &609914726507531370 stripped
 Transform:

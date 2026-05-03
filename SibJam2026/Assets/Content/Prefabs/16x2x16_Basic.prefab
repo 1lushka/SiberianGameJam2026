@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 16x2x16_Basic
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7f0a1e2bc0850964584f64f2fdbd26b6, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -203,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
   propertyScripts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8568371048249251054}
+  - {fileID: 8640320190557240152}
+  - {fileID: 2857393972436913627}
   propertyMaterials: []

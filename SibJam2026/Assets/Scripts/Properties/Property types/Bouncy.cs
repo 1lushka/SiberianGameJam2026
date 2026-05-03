@@ -22,7 +22,7 @@ public class Bouncy : MonoBehaviour
     }
     private void OnDisable()
     {
-        Destroy(this);
+        //Destroy(this);
     }
     public bool TriggerBounce(AdvancedWalkerController controller, Collider playerCollider)
     {

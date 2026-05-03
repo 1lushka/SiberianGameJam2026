@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stone
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bde6d2f235f3a8946946adae0632df0f, type: 3}
+      propertyPath: m_TagString
+      value: Platform
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -79,6 +83,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bde6d2f235f3a8946946adae0632df0f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4856376440088628611}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bde6d2f235f3a8946946adae0632df0f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8342538455622492807}
   m_SourcePrefab: {fileID: 100100000, guid: bde6d2f235f3a8946946adae0632df0f, type: 3}
 --- !u!1 &4230802398055099820 stripped
 GameObject:
@@ -105,7 +112,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 3, y: 1, z: 3}
-  m_Center: {x: 0, y: -0.48666757, z: 0}
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!54 &3709196604300324265
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -174,8 +181,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f162430758e31654a96ba9d4895d3c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Disappearing
-  shakeDuration: 0.8
+  shakeDuration: 20
   shakeStrength: 0.15
   vibrato: 30
   shrinkDuration: 0.4
-  delayBeforeShrink: 0.1
+  delayBeforeShrink: 0
+--- !u!114 &8342538455622492807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4230802398055099820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3575731cc51f57f4e8dc767f63770f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
+  propertyScripts:
+  - {fileID: 2568440817998459896}
+  - {fileID: 3016095958237702524}
+  - {fileID: 4856376440088628611}
+  propertyMaterials: []

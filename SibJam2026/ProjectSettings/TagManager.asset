@@ -7,6 +7,9 @@ TagManager:
   - Coin
   - Wall
   - LevelObj
+  - Ground
+  - Platform
+  - Zone
   layers:
   - Default
   - TransparentFX

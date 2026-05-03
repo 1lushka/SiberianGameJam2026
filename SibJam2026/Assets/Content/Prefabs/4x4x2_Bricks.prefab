@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 4x4x2_Bricks
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c5ec3c28f6bf68d4abb0ab5f40d929ee, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -195,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
   propertyScripts:
-  - {fileID: 7955062906594196624, guid: 7d931555e87222947a8181fc81cabd1e, type: 3}
-  - {fileID: 7266942197648214062, guid: 7d931555e87222947a8181fc81cabd1e, type: 3}
-  - {fileID: 5253116314650182310, guid: 7d931555e87222947a8181fc81cabd1e, type: 3}
+  - {fileID: 6736152310008573079}
+  - {fileID: 970221702520714770}
+  - {fileID: 5824978028093659416}
   propertyMaterials: []
