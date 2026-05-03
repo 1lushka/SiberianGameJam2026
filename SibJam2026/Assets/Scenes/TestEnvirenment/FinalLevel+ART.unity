@@ -10075,6 +10075,7 @@ GameObject:
   m_Component:
   - component: {fileID: 492277171}
   - component: {fileID: 492277170}
+  - component: {fileID: 492277172}
   m_Layer: 0
   m_Name: CoinCounter
   m_TagString: Untagged
@@ -10109,6 +10110,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &492277172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492277169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6060e25e11a5f43af7d6e76fce247c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OneTimeCursorLock
+  lockOnStart: 1
+  relockOnFocus: 1
+  requireClickForWebGL: 1
+  relockKey: 323
 --- !u!1 &497614157
 GameObject:
   m_ObjectHideFlags: 0
