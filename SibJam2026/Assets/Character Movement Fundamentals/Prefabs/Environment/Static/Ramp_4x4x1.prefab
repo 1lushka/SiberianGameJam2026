@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 7579422286399521159}
   - component: {fileID: 4021700107873900869}
   - component: {fileID: -2453324579084763806}
+  - component: {fileID: -2226031305935430476}
   m_Layer: 0
   m_Name: Ramp_4x4x1
-  m_TagString: Untagged
+  m_TagString: LevelObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,3 +191,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlipperySurface
   movementPresetOverride: {fileID: 11400000, guid: 6af1d2c4e98b4e3a91c7f0b25d6e4831, type: 2}
+--- !u!114 &-2226031305935430476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708980768314546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3575731cc51f57f4e8dc767f63770f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
+  propertyScripts:
+  - {fileID: 7955062906594196624, guid: 7d931555e87222947a8181fc81cabd1e, type: 3}
+  - {fileID: 7266942197648214062, guid: 7d931555e87222947a8181fc81cabd1e, type: 3}
+  - {fileID: 5253116314650182310, guid: 7d931555e87222947a8181fc81cabd1e, type: 3}
+  propertyMaterials: []

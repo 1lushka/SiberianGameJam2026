@@ -2,46 +2,40 @@ using UnityEngine;
 
 public class PropertyManager : MonoBehaviour
 {
-    [Tooltip("Дочерние объекты свойств (порядок важен, если используешь SetByIndex)")]
-    public GameObject[] propertyChildren;
+    [Tooltip("Скрипты свойств (Collectible, Bouncy, Damage, Solid, Slippery, Disappearing)")]
+    public MonoBehaviour[] propertyScripts;
 
-    [Tooltip("Индекс дочернего объекта свойства, который включится при старте")]
-    public int startIndex = 0;
+    [Tooltip("Материалы для каждого свойства (по тому же индексу)")]
+    public Material[] propertyMaterials;
 
-    private int currentIndex;
+    //public int startIndex = 0;
+
+    private MeshRenderer meshRenderer;
 
     void Start()
     {
-        SetPropertyIndex(startIndex);
+        meshRenderer = GetComponent<MeshRenderer>();
+        //SetPropertyIndex(startIndex);
     }
 
+    /// <summary>
+    /// Включает скрипт с указанным индексом, остальные отключает. Меняет материал.
+    /// </summary>
     public void SetPropertyIndex(int index)
     {
-        for (int i = 0; i < propertyChildren.Length; i++)
+        // Выключаем все скрипты
+        for (int i = 0; i < propertyScripts.Length; i++)
         {
-            if (propertyChildren[i] != null)
-                propertyChildren[i].SetActive(i == index);
+            if (propertyScripts[i] != null)
+                propertyScripts[i].enabled = false;
         }
-        currentIndex = index;
-    }
 
-    public void SetPropertyByName(string childName)
-    {
-        for (int i = 0; i < propertyChildren.Length; i++)
-        {
-            if (propertyChildren[i] != null && propertyChildren[i].name == childName)
-            {
-                SetPropertyIndex(i);
-                return;
-            }
-        }
-        Debug.LogWarning($"Property child '{childName}' не найден!");
-    }
+        // Включаем нужный
+        if (index >= 0 && index < propertyScripts.Length && propertyScripts[index] != null)
+            propertyScripts[index].enabled = true;
 
-    public void DisableAll()
-    {
-        foreach (var child in propertyChildren)
-            if (child != null) child.SetActive(false);
-        currentIndex = -1;
+        // Меняем материал
+        if (meshRenderer != null && propertyMaterials != null && index >= 0 && index < propertyMaterials.Length)
+            meshRenderer.material = propertyMaterials[index];
     }
 }
