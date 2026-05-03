@@ -9,12 +9,16 @@ public class LevelSelectButtonLockController : MonoBehaviour
     [SerializeField] private LevelSelectButtonData buttonData;
     [SerializeField] private LevelNode levelNode;
     [SerializeField] private Button targetButton;
+    [SerializeField] private Image targetImage;
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private GameObject lockVisual;
     [SerializeField] private TMP_Text progressText;
     [SerializeField] private bool destroyLockVisualWhenUnlocked = true;
+    [SerializeField] private Color completedColor = Color.green;
 
     private Coroutine delayedRefreshRoutine;
+    private Color defaultButtonColor = Color.white;
+    private bool hasCachedDefaultColor;
 
     private void Reset()
     {
@@ -24,6 +28,7 @@ public class LevelSelectButtonLockController : MonoBehaviour
     private void Awake()
     {
         AutoAssignReferences();
+        CacheDefaultColor();
     }
 
     private void OnEnable()
@@ -65,12 +70,17 @@ public class LevelSelectButtonLockController : MonoBehaviour
         int completedCount = CompletedLevelsRegistry.CompletedCount;
         int requiredCount = Mathf.Max(0, buttonData.requiredCompletedLevels);
         bool isUnlocked = completedCount >= requiredCount;
+        bool isCompleted = levelNode != null &&
+            ProgressManager.Instance != null &&
+            ProgressManager.Instance.GetState(levelNode.levelId) == LevelNode.NodeState.Completed;
 
         if (isUnlocked)
             UnlockLevelNodeIfNeeded();
 
         if (targetButton != null)
             targetButton.interactable = isUnlocked;
+
+        ApplyButtonColor(isCompleted);
 
         if (progressText != null)
             progressText.text = isUnlocked ? string.Empty : $"{completedCount}/{requiredCount}";
@@ -121,6 +131,15 @@ public class LevelSelectButtonLockController : MonoBehaviour
             titleText.text = buttonData.displayName;
     }
 
+    private void ApplyButtonColor(bool isCompleted)
+    {
+        if (targetImage == null)
+            return;
+
+        CacheDefaultColor();
+        targetImage.color = isCompleted ? completedColor : defaultButtonColor;
+    }
+
     private void SubscribeToProgress()
     {
         if (ProgressManager.Instance != null)
@@ -141,6 +160,14 @@ public class LevelSelectButtonLockController : MonoBehaviour
         if (targetButton == null)
             targetButton = GetComponent<Button>();
 
+        if (targetImage == null)
+        {
+            if (targetButton != null && targetButton.targetGraphic is Image buttonGraphic)
+                targetImage = buttonGraphic;
+            else
+                targetImage = GetComponent<Image>();
+        }
+
         if (titleText == null)
         {
             Transform titleTransform = transform.Find("LevelTitle");
@@ -157,5 +184,14 @@ public class LevelSelectButtonLockController : MonoBehaviour
 
         if (progressText == null && lockVisual != null)
             progressText = lockVisual.GetComponentInChildren<TMP_Text>(true);
+    }
+
+    private void CacheDefaultColor()
+    {
+        if (hasCachedDefaultColor || targetImage == null)
+            return;
+
+        defaultButtonColor = targetImage.color;
+        hasCachedDefaultColor = true;
     }
 }
