@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c67c0a2d51d4f64ab6f9e7a31b2c4d5, type: 3}
   m_Name: IceCharacterMovementPreset
   m_EditorClassIdentifier: 
-  movementSpeed: 14
-  acceleration: 18
+  movementSpeed: 40
+  acceleration: 9
   deceleration: 8
-  airControlRate: 0.75
-  airFriction: 10
+  airControlRate: 0.1
+  airFriction: 2
   jumpSpeed: 7
   jumpDuration: 0.3
   jumpBufferDuration: 0.2
-  coyoteTimeDuration: 0.25
+  coyoteTimeDuration: 0.3
   groundFriction: 150
   slideFriction: 0.05
   gravity: 30
   slideGravity: 28
-  slopeLimit: 18
+  slopeLimit: 2

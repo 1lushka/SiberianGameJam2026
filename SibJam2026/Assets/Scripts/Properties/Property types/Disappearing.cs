@@ -44,12 +44,20 @@ public class Disappearing : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         print("asdas");
-        if (triggered) return;
+        /*if (triggered) return;
 
         
         triggered = true;
+        StartDisappearing();*/
+    }
+
+    public void TriggerDisappearance()
+    {
+        if (triggered) return;
+        triggered = true;
         StartDisappearing();
     }
+
 
     private void StartDisappearing()
     {

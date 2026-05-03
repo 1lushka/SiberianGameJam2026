@@ -1496,6 +1496,10 @@ PrefabInstance:
       propertyPath: topCheckForwardOffset
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6170067607375571798, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: m_Height
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6682682384405896370, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.0000372
