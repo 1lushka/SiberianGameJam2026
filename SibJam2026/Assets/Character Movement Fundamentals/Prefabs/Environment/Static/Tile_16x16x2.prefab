@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 65196122031073594}
   - component: {fileID: 3807465986492341811}
   - component: {fileID: 7955062906594196624}
+  - component: {fileID: 7266942197648214062}
+  - component: {fileID: 5253116314650182310}
   m_Layer: 0
   m_Name: Tile_16x16x2
   m_TagString: Untagged
@@ -157,3 +159,33 @@ MonoBehaviour:
   bounceDirectionMode: 0
   bounceDirectionReference: {fileID: 0}
   preserveLateralMomentum: 1
+--- !u!114 &7266942197648214062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985475252292564}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f162430758e31654a96ba9d4895d3c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Disappearing
+  shakeDuration: 2
+  shakeStrength: 0.15
+  vibrato: 30
+  shrinkDuration: 0.4
+  delayBeforeShrink: 0
+--- !u!114 &5253116314650182310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985475252292564}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c538d376174018b2339f8f12c59730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlipperySurface
+  movementPresetOverride: {fileID: 11400000, guid: 6af1d2c4e98b4e3a91c7f0b25d6e4831, type: 2}

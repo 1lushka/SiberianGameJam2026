@@ -20,7 +20,10 @@ public class Bouncy : MonoBehaviour
     {
         cachedBounceCollider = FindBounceCollider();
     }
-
+    private void OnDisable()
+    {
+        Destroy(this);
+    }
     public bool TriggerBounce(AdvancedWalkerController controller, Collider playerCollider)
     {
         if (isActiveAndEnabled == false)

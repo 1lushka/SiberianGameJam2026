@@ -792,6 +792,11 @@ namespace CMF
 			SlipperySurface _slipperySurface = _groundCollider.GetComponentInParent<SlipperySurface>();
 			if(_slipperySurface != null)
 			{
+				if (!_slipperySurface.isActiveAndEnabled)
+				{
+					Destroy(_slipperySurface);
+					return;
+                }
 				SetActiveMovementPreset(ResolveSurfaceMovementPreset(_slipperySurface));
 				return;
 			}

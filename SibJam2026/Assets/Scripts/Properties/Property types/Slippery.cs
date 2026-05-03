@@ -15,6 +15,8 @@ public class SlipperyZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (isActiveAndEnabled == false)
+            return;
         if (!other.CompareTag("Player")) return;
 
         controller = other.GetComponent<AdvancedWalkerController>();
@@ -28,7 +30,10 @@ public class SlipperyZone : MonoBehaviour
         controller.acceleration = origAccel * accelerationMult;
         controller.deceleration = origDecel * decelerationMult;
     }
-
+    private void OnDisable()
+    {
+        Destroy(this);
+    }
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
