@@ -14,6 +14,7 @@ public class Bouncy : MonoBehaviour
     [SerializeField] private BounceDirectionMode bounceDirectionMode = BounceDirectionMode.ColliderNormal;
     [SerializeField] private Transform bounceDirectionReference;
     [SerializeField] private bool preserveLateralMomentum = true;
+
     private Collider cachedBounceCollider;
 
     private void Awake()
@@ -53,6 +54,10 @@ public class Bouncy : MonoBehaviour
             // Full override for consistent launch angle regardless of the incoming velocity.
             controller.SetMomentum(bounceDirection * bounceForce);
         }
+
+        AudioControl audioCtrl = controller.GetComponent<AudioControl>();
+        if (audioCtrl != null)
+            audioCtrl.PlayBounceSound();
 
         return true;
     }

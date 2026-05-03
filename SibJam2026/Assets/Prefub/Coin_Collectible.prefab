@@ -80,6 +80,8 @@ MonoBehaviour:
   onCollected:
     m_PersistentCalls:
       m_Calls: []
+  collectSounds:
+  - {fileID: 8300000, guid: 3e3d3ae970db6ac43ba942f5ee0e5f84, type: 3}
 --- !u!65 &1123345357324992033
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -3625,7 +3625,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1099779126829920241, guid: 8f12d2eb30836cf40940d2be2b468fd5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1075245622}
   m_SourcePrefab: {fileID: 100100000, guid: 8f12d2eb30836cf40940d2be2b468fd5, type: 3}
 --- !u!4 &165589672 stripped
 Transform:
@@ -22158,6 +22161,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4960817310007188, guid: 9af4bc1d01b9ec04c9d66a88ace89c21, type: 3}
   m_PrefabInstance: {fileID: 1074668623}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1075245615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1099779126829920241, guid: 8f12d2eb30836cf40940d2be2b468fd5, type: 3}
+  m_PrefabInstance: {fileID: 165589671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1075245622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075245615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f162430758e31654a96ba9d4895d3c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Disappearing
+  shakeDuration: 0.8
+  shakeStrength: 0.15
+  vibrato: 30
+  shrinkDuration: 0.4
+  delayBeforeShrink: 0.1
 --- !u!1 &1078304179
 GameObject:
   m_ObjectHideFlags: 0
@@ -43240,6 +43265,74 @@ PrefabInstance:
     - target: {fileID: 8109580532533950462, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: shakeClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: bounceClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: shrinkClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'shakeClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 0564216ccb7eb1f4abb1151ad603941d, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'shakeClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 9d9cc4b84957367498b7349fe90596fc, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'shakeClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 40772fb6f748e9d45a8cff5038c512fc, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'bounceClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 259662f3589ac5543a69dccffe9f6fdf, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'bounceClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 38ebdabe3dc7b8d438ecdbfcb0b25237, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'bounceClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f04efbc9ded1d9542ad45884ad1279c5, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'shrinkClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f2d609dcc7723d41891a89fa08ab062, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: ledgeClimbClips.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'ledgeClimbClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a8353133e25f4b1449fd976cc28f22da, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'ledgeClimbClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 664980617e6922c429b07afdf3a72ef5, type: 3}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'ledgeClimbClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'ledgeClimbClips.Array.data[3]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'ledgeClimbClips.Array.data[4]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092228648272320287, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
+      propertyPath: 'ledgeClimbClips.Array.data[5]'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9221672173501980139, guid: cdfbf8fef5f07d6478edf95ea4bdcfd9, type: 3}
       propertyPath: m_Name

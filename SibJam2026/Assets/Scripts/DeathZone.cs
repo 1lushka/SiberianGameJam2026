@@ -4,9 +4,11 @@ public class DeathZone : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (!CheckpointTrigger.IsPlayerCollider(other))
+        if (RespawnManager.Instance == null || RespawnManager.Instance.player == null)
             return;
 
-        CheckpointTrigger.RestartLevel();
+        // ѕровер€ем, что коллайдер принадлежит игроку
+        if (other.transform.root == RespawnManager.Instance.player)
+            RespawnManager.Instance.Respawn();
     }
 }
