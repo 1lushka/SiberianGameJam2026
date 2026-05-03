@@ -16,4 +16,4 @@ MonoBehaviour:
   isFinalLevel: 0
   tagBindings:
   - tag: Zone
-    propertyIndex: 1
+    propertyIndex: 0

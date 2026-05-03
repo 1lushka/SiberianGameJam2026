@@ -16,6 +16,6 @@ MonoBehaviour:
   isFinalLevel: 0
   tagBindings:
   - tag: Ground
-    propertyIndex: 1
+    propertyIndex: 0
   - tag: Platform
-    propertyIndex: 1
+    propertyIndex: 0

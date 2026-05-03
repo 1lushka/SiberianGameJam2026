@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stair8x4x4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4de7dc689fbbc1e459afe1248d92dcb9, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67,6 +71,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4de7dc689fbbc1e459afe1248d92dcb9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7346988041909332016}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4de7dc689fbbc1e459afe1248d92dcb9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1691741378038879927}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4de7dc689fbbc1e459afe1248d92dcb9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8064510569312668477}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4de7dc689fbbc1e459afe1248d92dcb9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6884684708573656115}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4de7dc689fbbc1e459afe1248d92dcb9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3141490635028687592}
   m_SourcePrefab: {fileID: 100100000, guid: 4de7dc689fbbc1e459afe1248d92dcb9, type: 3}
 --- !u!1 &8860891852464129827 stripped
 GameObject:
@@ -95,3 +111,66 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 9065473155632676156, guid: 4de7dc689fbbc1e459afe1248d92dcb9, type: 3}
+--- !u!114 &1691741378038879927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8860891852464129827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3575731cc51f57f4e8dc767f63770f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
+  propertyScripts:
+  - {fileID: 3141490635028687592}
+  - {fileID: -8064510569312668477}
+  - {fileID: -6884684708573656115}
+  propertyMaterials: []
+--- !u!114 &-8064510569312668477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8860891852464129827}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c538d376174018b2339f8f12c59730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlipperySurface
+  movementPresetOverride: {fileID: 11400000, guid: 6af1d2c4e98b4e3a91c7f0b25d6e4831, type: 2}
+--- !u!114 &-6884684708573656115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8860891852464129827}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f162430758e31654a96ba9d4895d3c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Disappearing
+  shakeDuration: 2
+  shakeStrength: 0.15
+  vibrato: 30
+  shrinkDuration: 0.4
+  delayBeforeShrink: 0
+--- !u!114 &3141490635028687592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8860891852464129827}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d84c51db8e9e94292e750b92eadca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bouncy
+  bounceForce: 23
+  bounceDirectionMode: 0
+  bounceDirectionReference: {fileID: 0}
+  preserveLateralMomentum: 1

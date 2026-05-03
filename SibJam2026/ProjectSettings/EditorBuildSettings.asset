@@ -6,13 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TestEnvirenment/Level_Final.unity
-    guid: 0ff66d4f80e36ec488c6bcc93ab3810a
+    path: Assets/Scenes/TestEnvirenment/FinalLevel+ART.unity
+    guid: d06e5b4e4cb17c443b95d19185d5234b
   - enabled: 1
-    path: Assets/Scenes/TestIlyaUI.unity
-    guid: f9b0ea0c0ec750e47a2dbbacd2448c1a
-  - enabled: 1
-    path: Assets/Scenes/TestIlya.unity
-    guid: f27e18689465f3845bd5e4e49094e621
+    path: Assets/Scenes/UI_LevelSelect.unity
+    guid: 4ff9d6e481f294147a4cb841b0bb3a23
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

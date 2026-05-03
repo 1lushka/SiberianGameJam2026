@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -1207278072254063227}
   m_Layer: 0
   m_Name: Stair_4x4x2
-  m_TagString: LevelObj
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropertyManager
   propertyScripts:
-  - {fileID: 7955062906594196624, guid: 7d931555e87222947a8181fc81cabd1e, type: 3}
-  - {fileID: 7266942197648214062, guid: 7d931555e87222947a8181fc81cabd1e, type: 3}
-  - {fileID: 5253116314650182310, guid: 7d931555e87222947a8181fc81cabd1e, type: 3}
+  - {fileID: -8072567487076871207}
+  - {fileID: -5214865803607140905}
+  - {fileID: -5320838036970186320}
   propertyMaterials: []
