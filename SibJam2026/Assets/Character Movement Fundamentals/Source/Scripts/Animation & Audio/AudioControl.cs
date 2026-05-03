@@ -31,14 +31,17 @@ namespace CMF
 		[Range(0f, 1f)]
 		public float audioClipVolume = 0.1f;
 
+		//Range of random pitch deviation used for short character sounds;
+		public float randomPitchRange = 0.05f;
+
 		//Range of random volume deviation used for footsteps;
 		//Footstep audio clips will be played at different volumes for a more "natural sounding" result;
 		public float relativeRandomizedVolumeRange = 0.2f;
 
 		//Audio clips;
 		public AudioClip[] footStepClips;
-		public AudioClip jumpClip;
-		public AudioClip landClip;
+		public AudioClip[] jumpClips;
+		public AudioClip[] landClips;
 
 		//Setup;
 		void Start () {
@@ -101,10 +104,10 @@ namespace CMF
 			}
 		}
 
-		void PlayFootstepSound(float _movementSpeed)
+        public void PlayFootstepSound(float _movementSpeed)
 		{
 			int _footStepClipIndex = Random.Range(0, footStepClips.Length);
-			audioSource.PlayOneShot(footStepClips[_footStepClipIndex], audioClipVolume + audioClipVolume * Random.Range(-relativeRandomizedVolumeRange, relativeRandomizedVolumeRange));
+			PlayClip(footStepClips[_footStepClipIndex], audioClipVolume + audioClipVolume * Random.Range(-relativeRandomizedVolumeRange, relativeRandomizedVolumeRange));
 		}
 
 		void OnLand(Vector3 _v)
@@ -114,13 +117,32 @@ namespace CMF
 				return;
 
 			//Play land audio clip;
-			audioSource.PlayOneShot(landClip, audioClipVolume);
+			PlayRandomClip(landClips, audioClipVolume);
 		}
 
 		void OnJump(Vector3 _v)
 		{
 			//Play jump audio clip;
-			audioSource.PlayOneShot(jumpClip, audioClipVolume);
+			PlayRandomClip(jumpClips, audioClipVolume);
+		}
+
+		void PlayRandomClip(AudioClip[] _clips, float _volume)
+		{
+			if(_clips == null || _clips.Length == 0)
+				return;
+
+			int _clipIndex = Random.Range(0, _clips.Length);
+			PlayClip(_clips[_clipIndex], _volume);
+		}
+
+		void PlayClip(AudioClip _clip, float _volume)
+		{
+			if(_clip == null || audioSource == null)
+				return;
+
+			audioSource.pitch = 1f + Random.Range(-randomPitchRange, randomPitchRange);
+			audioSource.PlayOneShot(_clip, _volume);
+			audioSource.pitch = 1f;
 		}
 	}
 }
