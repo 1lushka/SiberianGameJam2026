@@ -1,14 +1,19 @@
+using CMF;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RespawnManager : MonoBehaviour
 {
     public static RespawnManager Instance { get; private set; }
 
-    [Header("Drag & Drop in Inspector")]
+    [Header("Drag & Drop в инспекторе")]
     public Transform player;
     public Transform startPoint;
 
-    // Статические данные чекпоинта (сохраняются глобально)
+    [Header("Имя сцены уровней (где работают чекпоинты)")]
+    [SerializeField] private string gameSceneName = "GameScene";
+
+    // Статические данные чекпоинта
     private static string savedSceneName;
     private static Vector3 savedPosition;
     private static Quaternion savedRotation = Quaternion.identity;
@@ -22,19 +27,38 @@ public class RespawnManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    /// <summary>
-    /// Вызвать из DeathZone или где угодно.
-    /// Перемещает игрока на чекпоинт или на startPoint.
-    /// </summary>
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Когда загружается GameScene (любой уровень) – сбрасываем чекпоинт
+        if (scene.name == gameSceneName)
+        {
+            ClearCheckpoint();
+        }
+    }
+
     public void Respawn()
     {
         if (player == null)
         {
-            Debug.LogError("RespawnManager: Player Transform not assigned!");
-            return;
+            // Если ссылка потеряна (после перезагрузки сцены), попробуем найти игрока по статическому поиску
+            AdvancedWalkerController controller = FindObjectOfType<AdvancedWalkerController>();
+            if (controller != null)
+                player = controller.transform;
+            else
+            {
+                Debug.LogError("RespawnManager: Player не найден!");
+                return;
+            }
         }
 
         string currentScene = gameObject.scene.name;
@@ -53,7 +77,7 @@ public class RespawnManager : MonoBehaviour
         {
             if (startPoint == null)
             {
-                Debug.LogError("RespawnManager: Start Point not assigned!");
+                Debug.LogError("RespawnManager: Start Point не назначен!");
                 return;
             }
             targetPos = startPoint.position;
@@ -88,7 +112,6 @@ public class RespawnManager : MonoBehaviour
         player.SetPositionAndRotation(pos, rot);
     }
 
-    // Вызывается из CheckpointTrigger
     public void SaveCheckpoint(Vector3 pos, Quaternion rot)
     {
         savedSceneName = gameObject.scene.name;
@@ -103,5 +126,6 @@ public class RespawnManager : MonoBehaviour
         hasSavedCheckpoint = false;
         savedPosition = Vector3.zero;
         savedRotation = Quaternion.identity;
+        savedSceneName = "";
     }
 }
