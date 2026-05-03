@@ -14,4 +14,6 @@ public class LevelConfiguration : ScriptableObject
     }
 
     public TagPropertyBinding[] tagBindings;
+
+    public AudioClip levelMusic;
 }

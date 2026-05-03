@@ -29,5 +29,15 @@ public class LevelInitializer : MonoBehaviour
                 }
             }
         }
+
+        if (CurrentConfig != null && CurrentConfig.levelMusic != null)
+        {
+            AudioSource audioSource = GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.clip = CurrentConfig.levelMusic;
+                audioSource.Play();
+            }
+        }
     }
 }
