@@ -902,6 +902,7 @@ GameObject:
   m_Component:
   - component: {fileID: 662759430}
   - component: {fileID: 662759429}
+  - component: {fileID: 662759431}
   m_Layer: 0
   m_Name: ProgresManager
   m_TagString: Untagged
@@ -936,6 +937,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &662759431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662759428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79e32034e21ead47a9be2a127ed0014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProgressDebugActions
+  logProgressKey: 112
+  logProgressCharacter: "\u043F"
+  clearProgressKey: 120
+  clearProgressCharacter: "\u0445"
 --- !u!1 &691963517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,6 +1031,7 @@ GameObject:
   - component: {fileID: 791323824}
   - component: {fileID: 791323823}
   - component: {fileID: 791323822}
+  - component: {fileID: 791323826}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1139,6 +1157,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &791323826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791323821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6060e25e11a5f43af7d6e76fce247c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OneTimeCursorLock
+  lockAndHideCursor: 0
+  lockOnStart: 1
+  relockOnFocus: 1
+  requireClickForWebGL: 1
+  relockKey: 323
 --- !u!1 &871463786
 GameObject:
   m_ObjectHideFlags: 0

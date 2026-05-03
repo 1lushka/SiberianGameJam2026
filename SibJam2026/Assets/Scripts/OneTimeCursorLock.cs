@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class OneTimeCursorLock : MonoBehaviour
 {
+    [SerializeField] private bool lockAndHideCursor = true;
     [SerializeField] private bool lockOnStart = true;
     [SerializeField] private bool relockOnFocus = true;
     [SerializeField] private bool requireClickForWebGL = true;
@@ -12,7 +13,7 @@ public class OneTimeCursorLock : MonoBehaviour
     private void Start()
     {
         if (lockOnStart)
-            TryLockCursor();
+            ApplyCursorState();
     }
 
     private void Update()
@@ -20,13 +21,13 @@ public class OneTimeCursorLock : MonoBehaviour
 #if UNITY_WEBGL && !UNITY_EDITOR
         if (requireClickForWebGL && !hasRequestedInitialLock && Input.GetKeyDown(relockKey))
         {
-            TryLockCursor();
+            ApplyCursorState();
             return;
         }
 #endif
 
         if (Cursor.lockState != CursorLockMode.Locked && Input.GetKeyDown(relockKey))
-            TryLockCursor();
+            ApplyCursorState();
     }
 
     private void OnApplicationFocus(bool hasFocus)
@@ -34,13 +35,22 @@ public class OneTimeCursorLock : MonoBehaviour
         if (!hasFocus || !relockOnFocus)
             return;
 
-        TryLockCursor();
+        ApplyCursorState();
     }
 
-    public void TryLockCursor()
+    public void ApplyCursorState()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (lockAndHideCursor)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         hasRequestedInitialLock = true;
     }
 }
