@@ -25,6 +25,11 @@ public class CharacterMovementPreset : ScriptableObject
 	public float slideGravity = 5f;
 	public float slopeLimit = 80f;
 
+	[Header("Audio")]
+	public AudioClip[] footstepClips;
+	public AudioClip[] jumpClips;
+	public AudioClip[] landClips;
+
 	void OnValidate()
 	{
 		movementSpeed = Mathf.Max(0f, movementSpeed);

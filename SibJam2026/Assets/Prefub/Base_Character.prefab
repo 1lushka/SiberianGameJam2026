@@ -347,7 +347,7 @@ MonoBehaviour:
   cameraSpeed: 250
   smoothCameraRotation: 0
   cameraSmoothingFactor: 25
-  turnCameraTowardMovementDirection: 1
+  turnCameraTowardMovementDirection: 0
   controller: {fileID: 471597121255793947}
   maximumMovementSpeed: 7
   cameraTurnSpeed: 60
@@ -5703,7 +5703,7 @@ MonoBehaviour:
   audioClipVolume: 0.2
   randomPitchRange: 0.05
   relativeRandomizedVolumeRange: 0.2
-  ledgeClimbDistance: 0.25
+  ledgeClimbDistance: 1.8
   footStepClips:
   - {fileID: 8300000, guid: ac41dc5872d4c9242aaa2b7ee83c9ba1, type: 3}
   - {fileID: 8300000, guid: bf28df9739abab140ae38293934178f5, type: 3}

@@ -69,7 +69,9 @@ namespace CMF
 		AdvancedWalkerController controller;
 		Mover mover;
 		CharacterInput characterInput;
+		AudioControl audioControl;
 		[SerializeField] Animator animator;
+		[SerializeField] Transform visualRotationRoot;
 		Rigidbody rig;
 		Transform tr;
 		TurnTowardControllerVelocity[] turnTowardVelocityComponents;
@@ -96,10 +98,12 @@ namespace CMF
 			controller = GetComponent<AdvancedWalkerController>();
 			mover = GetComponent<Mover>();
 			characterInput = GetComponent<CharacterInput>();
+			audioControl = GetComponent<AudioControl>();
 			if(animator == null)
 				animator = GetComponentInChildren<Animator>();
 			rig = GetComponent<Rigidbody>();
 			tr = transform;
+			visualRotationRoot = ResolveVisualRotationRoot();
 			turnTowardVelocityComponents = GetComponentsInChildren<TurnTowardControllerVelocity>(true);
 			turnTowardVelocityStates = new bool[turnTowardVelocityComponents.Length];
 		}
@@ -154,6 +158,7 @@ namespace CMF
 		{
 			if(!isHanging)
 			{
+				SetLedgeAudioState(false, Vector3.zero);
 				SetClimbAnimationState(false);
 				return;
 			}
@@ -174,6 +179,7 @@ namespace CMF
 			}
 
 			RestoreTurnTowardComponents();
+			SetLedgeAudioState(false, Vector3.zero);
 			SetClimbAnimationState(false);
 		}
 
@@ -232,6 +238,8 @@ namespace CMF
 			rig.linearVelocity = Vector3.zero;
 			rig.angularVelocity = Vector3.zero;
 			SnapToWallRotation();
+			SetLedgeAudioState(true, Vector3.zero);
+			audioControl?.PlayJumpSound();
 			SetClimbAnimationState(true);
 			SetClimbingMoveParameter(0f);
 		}
@@ -240,20 +248,20 @@ namespace CMF
 		{
 			if(dropKeyWasPressed)
 			{
-				ReleaseFromLedge(currentWallNormal * dropAwaySpeed);
+				ReleaseFromLedge(currentWallNormal * dropAwaySpeed, true);
 				return;
 			}
 
 			if(HasBufferedJumpRequest())
 			{
 				lastJumpPressedTime = Mathf.NegativeInfinity;
-				ReleaseFromLedge((tr.up * jumpOffUpwardSpeed) + (currentWallNormal * jumpOffAwaySpeed));
+				ReleaseFromLedge((tr.up * jumpOffUpwardSpeed) + (currentWallNormal * jumpOffAwaySpeed), true);
 				return;
 			}
 
 			if(!TryGetLedge(rig.position, -currentWallNormal, out LedgeData _currentLedge))
 			{
-				ReleaseFromLedge(Vector3.zero);
+				ReleaseFromLedge(Vector3.zero, false);
 				return;
 			}
 
@@ -262,6 +270,7 @@ namespace CMF
 
 			UpdateSideMovementTarget();
 			MoveTowardHangPoint();
+			SetLedgeAudioState(true, GetLedgeTraversalVelocity());
 			UpdateHangRotation();
 			UpdateClimbingAnimation();
 		}
@@ -312,6 +321,7 @@ namespace CMF
 
 		void UpdateHangRotation()
 		{
+			Transform _rotationTarget = GetRotationTarget();
 			Vector3 _lookDirection = Vector3.ProjectOnPlane(-currentWallNormal, tr.up);
 			if(_lookDirection.sqrMagnitude <= 0.0001f)
 				return;
@@ -319,20 +329,21 @@ namespace CMF
 			Quaternion _targetRotation = Quaternion.LookRotation(_lookDirection.normalized, tr.up);
 			if(faceWallTurnSpeed <= 0f)
 			{
-				tr.rotation = _targetRotation;
+				_rotationTarget.rotation = _targetRotation;
 				return;
 			}
 
-			tr.rotation = Quaternion.RotateTowards(tr.rotation, _targetRotation, faceWallTurnSpeed * Time.fixedDeltaTime);
+			_rotationTarget.rotation = Quaternion.RotateTowards(_rotationTarget.rotation, _targetRotation, faceWallTurnSpeed * Time.fixedDeltaTime);
 		}
 
 		void SnapToWallRotation()
 		{
+			Transform _rotationTarget = GetRotationTarget();
 			Vector3 _lookDirection = Vector3.ProjectOnPlane(-currentWallNormal, tr.up);
 			if(_lookDirection.sqrMagnitude <= 0.0001f)
 				return;
 
-			tr.rotation = Quaternion.LookRotation(_lookDirection.normalized, tr.up);
+			_rotationTarget.rotation = Quaternion.LookRotation(_lookDirection.normalized, tr.up);
 		}
 
 		bool HasBufferedJumpRequest()
@@ -343,7 +354,7 @@ namespace CMF
 			return (Time.time - lastJumpPressedTime) <= jumpInputBufferDuration;
 		}
 
-		void ReleaseFromLedge(Vector3 _releaseVelocity)
+		void ReleaseFromLedge(Vector3 _releaseVelocity, bool _playJumpSound)
 		{
 			isHanging = false;
 			nextAllowedGrabTime = Time.time + regrabCooldown;
@@ -359,7 +370,33 @@ namespace CMF
 			if(_releaseVelocity.sqrMagnitude > 0.0001f)
 				lastProbeForward = Vector3.ProjectOnPlane(_releaseVelocity, tr.up).normalized;
 
+			if(_playJumpSound)
+				audioControl?.PlayJumpSound();
+
+			SetLedgeAudioState(false, Vector3.zero);
 			SetClimbAnimationState(false);
+		}
+
+		Vector3 GetLedgeTraversalVelocity()
+		{
+			if(rig == null)
+				return Vector3.zero;
+
+			Vector3 _ledgeTangent = Vector3.Cross(currentWallNormal, tr.up).normalized;
+			if(_ledgeTangent.sqrMagnitude <= 0.0001f)
+				return Vector3.zero;
+
+			float _signedSpeed = Vector3.Dot(rig.linearVelocity, _ledgeTangent);
+			return _ledgeTangent * _signedSpeed;
+		}
+
+		void SetLedgeAudioState(bool _isClimbing, Vector3 _moveVelocity)
+		{
+			if(audioControl == null)
+				return;
+
+			audioControl.isLedgeClimbing = _isClimbing;
+			audioControl.ledgeMoveVelocity = _moveVelocity;
 		}
 
 		void UpdateClimbingAnimation()
@@ -631,6 +668,27 @@ namespace CMF
 				turnTowardVelocityComponents[i].enabled = false;
 				turnTowardVelocityComponents[i].transform.localRotation = Quaternion.identity;
 			}
+		}
+
+		Transform ResolveVisualRotationRoot()
+		{
+			if(visualRotationRoot != null)
+				return visualRotationRoot;
+
+			Transform _modelRoot = tr != null ? tr.Find("ModelRoot") : null;
+			if(_modelRoot != null)
+				return _modelRoot;
+
+			TurnTowardControllerVelocity _turnTowardVelocity = GetComponentInChildren<TurnTowardControllerVelocity>(true);
+			if(_turnTowardVelocity != null)
+				return _turnTowardVelocity.transform;
+
+			return null;
+		}
+
+		Transform GetRotationTarget()
+		{
+			return visualRotationRoot != null ? visualRotationRoot : tr;
 		}
 
 		void RestoreTurnTowardComponents()

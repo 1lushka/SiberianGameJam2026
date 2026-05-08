@@ -20,6 +20,9 @@ public class PauseMenu : MonoBehaviour
 
     private bool isPaused;
 
+    public float delayLoad;
+    public static bool isLoading;
+
     private void Start()
     {
         if (pausePanel != null)
@@ -63,6 +66,17 @@ public class PauseMenu : MonoBehaviour
 
     private void Resume()
     {
+        Time.timeScale = 1f;
+        if (!isLoading)
+        {
+            isLoading = true;
+            Invoke("DelayResume", delayLoad); // Небольшая задержка для отработки анимации кнопки и передачи данных
+        }
+    }
+
+    private void DelayResume()
+    {
+        isLoading = false;
         if (pausePanel != null)
             pausePanel.SetActive(false);
 
@@ -83,6 +97,16 @@ public class PauseMenu : MonoBehaviour
     private void ReturnToMap()
     {
         Time.timeScale = 1f;
+        if (!isLoading)
+        {
+            isLoading = true;
+            Invoke("LoadLevel", delayLoad); // Небольшая задержка для отработки анимации кнопки и передачи данных
+        }
+    }
+    private void LoadLevel()
+    {
+        isLoading = false;
         SceneManager.LoadScene(returnSceneName);
     }
+
 }

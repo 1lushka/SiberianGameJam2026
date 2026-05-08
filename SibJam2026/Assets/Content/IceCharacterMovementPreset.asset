@@ -26,3 +26,19 @@ MonoBehaviour:
   gravity: 30
   slideGravity: 28
   slopeLimit: 2
+  footstepClips:
+  - {fileID: 8300000, guid: d9dfb34f7b54ef04f82ad61944701191, type: 3}
+  - {fileID: 8300000, guid: 2b0bf0b3f98c2f142a48f9b12bb4b865, type: 3}
+  - {fileID: 8300000, guid: ba44fb2b071ea6142b0c7c175e417101, type: 3}
+  - {fileID: 8300000, guid: eefe876b2f914924695f3ec7046d53e7, type: 3}
+  - {fileID: 8300000, guid: c28c18d6c1eec244bbc2e6628c41f42f, type: 3}
+  - {fileID: 8300000, guid: 7cc971795a4ae5448a6146cf5a7a46ab, type: 3}
+  jumpClips:
+  - {fileID: 8300000, guid: f74dc9ade7651e84db6b56096ef0632e, type: 3}
+  - {fileID: 8300000, guid: 3fe2d46e6f9f2e2409639549c7b9a071, type: 3}
+  - {fileID: 8300000, guid: f684e32aa6953634d8e6cd53ae1b08c6, type: 3}
+  - {fileID: 8300000, guid: afd21518a168fbf4a97d48f8b6410702, type: 3}
+  landClips:
+  - {fileID: 8300000, guid: 749054dbd5d106c418ecb09394688375, type: 3}
+  - {fileID: 8300000, guid: 0be4764937f06cb4598fb3731d255b0b, type: 3}
+  - {fileID: 8300000, guid: e155067b7fc07cd44b058a5ccb7f8dd3, type: 3}

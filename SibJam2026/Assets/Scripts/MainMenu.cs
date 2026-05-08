@@ -22,6 +22,10 @@ public class MainMenu : MonoBehaviour
     [Header("Загружаемая сцена")]
     [SerializeField] private string gameSceneName = "Map";
 
+
+    public float delayLoad;
+    public static bool isLoading;
+
     private void Start()
     {
         if (startButton != null) startButton.onClick.AddListener(OnStartClicked);
@@ -38,7 +42,23 @@ public class MainMenu : MonoBehaviour
         if (settingsPanel != null) settingsPanel.SetActive(false);
     }
 
-    private void OnStartClicked() => SceneManager.LoadScene(gameSceneName);
+    private void OnStartClicked() 
+    {
+        if (!isLoading)
+        {
+            isLoading = true;
+            Invoke("LoadLevel", delayLoad); // Небольшая задержка для отработки анимации кнопки и передачи данных
+        }
+        
+    }
+
+    private void LoadLevel()
+    {
+        isLoading = false;
+        Debug.Log($"[LevelNode] Загружаю сцену '{gameSceneName}'");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(gameSceneName);
+    }
+
     private void OnSettingsClicked() { if (settingsPanel != null) settingsPanel.SetActive(true); }
     private void OnBackClicked() { if (settingsPanel != null) settingsPanel.SetActive(false); }
     private void OnQuitClicked() => Application.Quit();

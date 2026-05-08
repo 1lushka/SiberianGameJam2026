@@ -146,20 +146,25 @@ namespace CMF
             if (_speed <= _speedThreshold)
                 return;
 
-            // Накапливаем расстояние (как в шагах, когда useAnimationBasedFootsteps = false)
+            // Use a dedicated traversal distance so ledge movement cadence can be tuned separately.
             ledgeClimbDistanceCounter += Time.deltaTime * _speed;
 
-            if (ledgeClimbDistanceCounter >= ledgeClimbDistance)
+            float _ledgeStepDistance = ledgeClimbDistance > 0f ? ledgeClimbDistance : footstepDistance;
+            if (ledgeClimbDistanceCounter >= _ledgeStepDistance)
             {
-                PlayLedgeClimbSound();
+                PlayFootstepSound(_speed);
                 ledgeClimbDistanceCounter = 0f;
             }
         }
 
         public void PlayFootstepSound(float _movementSpeed)
 		{
-			int _footStepClipIndex = Random.Range(0, footStepClips.Length);
-			PlayClip(footStepClips[_footStepClipIndex], audioClipVolume + audioClipVolume * Random.Range(-relativeRandomizedVolumeRange, relativeRandomizedVolumeRange));
+			AudioClip[] _clips = ResolveFootstepClips();
+			if(_clips == null || _clips.Length == 0)
+				return;
+
+			int _footStepClipIndex = Random.Range(0, _clips.Length);
+			PlayClip(_clips[_footStepClipIndex], audioClipVolume + audioClipVolume * Random.Range(-relativeRandomizedVolumeRange, relativeRandomizedVolumeRange));
 		}
 
 		void OnLand(Vector3 _v)
@@ -169,14 +174,54 @@ namespace CMF
 				return;
 
 			//Play land audio clip;
-			PlayRandomClip(landClips, audioClipVolume);
+			PlayRandomClip(ResolveLandClips(), audioClipVolume);
 		}
 
 		void OnJump(Vector3 _v)
 		{
-			//Play jump audio clip;
-			PlayRandomClip(jumpClips, audioClipVolume);
+			PlayJumpSound();
 		}
+
+        public void PlayJumpSound()
+        {
+            //Play jump audio clip;
+            PlayRandomClip(ResolveJumpClips(), audioClipVolume);
+        }
+
+        AudioClip[] ResolveFootstepClips()
+        {
+            CharacterMovementPreset _preset = GetActiveMovementPreset();
+            if(_preset != null && _preset.footstepClips != null && _preset.footstepClips.Length > 0)
+                return _preset.footstepClips;
+
+            return footStepClips;
+        }
+
+        AudioClip[] ResolveJumpClips()
+        {
+            CharacterMovementPreset _preset = GetActiveMovementPreset();
+            if(_preset != null && _preset.jumpClips != null && _preset.jumpClips.Length > 0)
+                return _preset.jumpClips;
+
+            return jumpClips;
+        }
+
+        AudioClip[] ResolveLandClips()
+        {
+            CharacterMovementPreset _preset = GetActiveMovementPreset();
+            if(_preset != null && _preset.landClips != null && _preset.landClips.Length > 0)
+                return _preset.landClips;
+
+            return landClips;
+        }
+
+        CharacterMovementPreset GetActiveMovementPreset()
+        {
+            if(controller is AdvancedWalkerController _walkerController)
+                return _walkerController.CurrentMovementPreset;
+
+            return null;
+        }
 
 		void PlayRandomClip(AudioClip[] _clips, float _volume)
 		{

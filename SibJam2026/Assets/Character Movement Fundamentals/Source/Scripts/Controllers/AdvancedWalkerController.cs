@@ -833,6 +833,11 @@ namespace CMF
 			return defaultMovementPreset;
 		}
 
+		public CharacterMovementPreset CurrentMovementPreset
+		{
+			get { return GetCurrentMovementPreset(); }
+		}
+
 		float GetMovementSpeed()
 		{
 			CharacterMovementPreset _preset = GetCurrentMovementPreset();

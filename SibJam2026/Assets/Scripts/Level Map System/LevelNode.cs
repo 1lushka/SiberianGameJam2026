@@ -21,6 +21,9 @@ public class LevelNode : MonoBehaviour
     public TextMeshProUGUI coinsText;
     public GameObject lockIcon;
 
+    public float delayLoad;
+    public static bool isLoading;
+
     public enum NodeState { Locked, Unlocked, Completed }
 
     void Start()
@@ -90,6 +93,17 @@ public class LevelNode : MonoBehaviour
         FinishTrigger.SetLevelsToUnlock(ids.ToArray());
 
         ProgressManager.Instance.CurrentLevelConfig = levelConfig;
+        if (!isLoading)
+        {
+            isLoading = true;
+            Invoke("LoadLevel", delayLoad); // Небольшая задержка для отработки анимации кнопки и передачи данных
+        }
+       
+    }
+
+    private void LoadLevel()
+    {
+        isLoading = false;
         Debug.Log($"[LevelNode] Загружаю сцену '{gameSceneName}'");
         UnityEngine.SceneManagement.SceneManager.LoadScene(gameSceneName);
     }
