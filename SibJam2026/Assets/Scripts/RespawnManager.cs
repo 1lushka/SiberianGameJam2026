@@ -6,18 +6,19 @@ public class RespawnManager : MonoBehaviour
 {
     public static RespawnManager Instance { get; private set; }
 
-    [Header("Drag & Drop в инспекторе")]
+    [Header("Scene References")]
     public Transform player;
     public Transform startPoint;
 
-    [Header("Имя сцены уровней (где работают чекпоинты)")]
-    [SerializeField] private string gameSceneName = "GameScene";
-
-    // Статические данные чекпоинта
+    // Static checkpoint data survives a scene reload.
     private static string savedSceneName;
     private static Vector3 savedPosition;
     private static Quaternion savedRotation = Quaternion.identity;
     private static bool hasSavedCheckpoint;
+
+    // One-shot restore flag for reloading the current level.
+    private static bool restoreAfterSceneReload;
+    private static string restoreSceneName;
 
     private void Awake()
     {
@@ -26,42 +27,70 @@ public class RespawnManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        Instance = this;
-        //DontDestroyOnLoad(gameObject);
 
+        Instance = this;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDestroy()
     {
+        if (Instance == this)
+            Instance = null;
+
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Когда загружается GameScene (любой уровень) – сбрасываем чекпоинт
-        if (scene.name == gameSceneName)
+        if (restoreAfterSceneReload && scene.name == restoreSceneName)
         {
-            ClearCheckpoint();
+            restoreAfterSceneReload = false;
+            RestorePlayerAfterReload();
+            return;
         }
+
+        ClearCheckpoint();
     }
 
     public void Respawn()
     {
-        if (player == null)
+        string currentScene = SceneManager.GetActiveScene().name;
+        if (string.IsNullOrWhiteSpace(currentScene))
         {
-            // Если ссылка потеряна (после перезагрузки сцены), попробуем найти игрока по статическому поиску
-            AdvancedWalkerController controller = FindObjectOfType<AdvancedWalkerController>();
-            if (controller != null)
-                player = controller.transform;
-            else
-            {
-                Debug.LogError("RespawnManager: Player не найден!");
-                return;
-            }
+            Debug.LogError("RespawnManager: Failed to resolve current scene for reload.");
+            return;
         }
 
-        string currentScene = gameObject.scene.name;
+        PreserveCurrentLevelConfig();
+
+        restoreAfterSceneReload = true;
+        restoreSceneName = currentScene;
+
+        Debug.Log($"RespawnManager: Reloading scene '{currentScene}' from checkpoint.");
+        SceneManager.LoadScene(currentScene);
+    }
+
+    private void PreserveCurrentLevelConfig()
+    {
+        if (ProgressManager.Instance == null || LevelInitializer.Instance == null)
+            return;
+
+        LevelConfiguration currentConfig = LevelInitializer.Instance.CurrentConfig;
+        if (currentConfig != null)
+            ProgressManager.Instance.CurrentLevelConfig = currentConfig;
+    }
+
+    private void RestorePlayerAfterReload()
+    {
+        ResolveSceneReferences();
+
+        if (player == null)
+        {
+            Debug.LogError("RespawnManager: Player not found after scene reload.");
+            return;
+        }
+
+        string currentScene = SceneManager.GetActiveScene().name;
         bool useCheckpoint = hasSavedCheckpoint && savedSceneName == currentScene;
 
         Vector3 targetPos;
@@ -71,21 +100,32 @@ public class RespawnManager : MonoBehaviour
         {
             targetPos = savedPosition;
             targetRot = savedRotation;
-            Debug.Log("Respawning to checkpoint: " + targetPos);
+            Debug.Log("Respawning to checkpoint after reload: " + targetPos);
         }
         else
         {
             if (startPoint == null)
             {
-                Debug.LogError("RespawnManager: Start Point не назначен!");
+                Debug.LogError("RespawnManager: Start Point is not assigned.");
                 return;
             }
+
             targetPos = startPoint.position;
             targetRot = startPoint.rotation;
-            Debug.Log("Respawning to start: " + targetPos);
+            Debug.Log("Respawning to start after reload: " + targetPos);
         }
 
         ApplyPosition(targetPos, targetRot);
+    }
+
+    private void ResolveSceneReferences()
+    {
+        if (player == null)
+        {
+            AdvancedWalkerController controller = FindObjectOfType<AdvancedWalkerController>();
+            if (controller != null)
+                player = controller.transform;
+        }
     }
 
     private void ApplyPosition(Vector3 pos, Quaternion rot)
@@ -114,7 +154,7 @@ public class RespawnManager : MonoBehaviour
 
     public void SaveCheckpoint(Vector3 pos, Quaternion rot)
     {
-        savedSceneName = gameObject.scene.name;
+        savedSceneName = SceneManager.GetActiveScene().name;
         savedPosition = pos;
         savedRotation = rot;
         hasSavedCheckpoint = true;
@@ -127,5 +167,7 @@ public class RespawnManager : MonoBehaviour
         savedPosition = Vector3.zero;
         savedRotation = Quaternion.identity;
         savedSceneName = "";
+        restoreAfterSceneReload = false;
+        restoreSceneName = "";
     }
 }
