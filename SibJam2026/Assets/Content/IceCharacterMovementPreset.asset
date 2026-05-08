@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: IceCharacterMovementPreset
   m_EditorClassIdentifier: 
   movementSpeed: 40
-  acceleration: 9
-  deceleration: 8
-  airControlRate: 0.1
-  airFriction: 2
+  acceleration: 10
+  deceleration: 20
+  airControlRate: 0.2
+  airFriction: 3
   jumpSpeed: 7
   jumpDuration: 0.25
   jumpBufferDuration: 0.2
-  coyoteTimeDuration: 0.3
-  groundFriction: 150
+  coyoteTimeDuration: 0.35
+  groundFriction: 200
   slideFriction: 0.05
   gravity: 30
   slideGravity: 28
