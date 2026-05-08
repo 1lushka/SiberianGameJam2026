@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7458557577604463945}
   - component: {fileID: 2448627035593041363}
   - component: {fileID: 3778904791791201552}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 1144268862617776782}
   - component: {fileID: 2630968093179536012}
   - component: {fileID: 1453950377104126755}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ModelRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 6978024723729409707}
   - component: {fileID: 3253429744206357015}
   - component: {fileID: 4249544012435303817}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CameraRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 7052763184045323290}
   - component: {fileID: 2803283043393747673}
   - component: {fileID: 3768333281019573264}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CameraControls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ MonoBehaviour:
   - {fileID: 6170067607375571798}
   minimumDistanceFromObstacles: 0.3
   smoothingFactor: 35
-  spherecastRadius: 0.2
+  spherecastRadius: 0.5
 --- !u!114 &2803283043393747673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,6 +368,67 @@ MonoBehaviour:
   invertHorizontalInput: 0
   invertVerticalInput: 0
   mouseInputMultiplier: 0.01
+--- !u!1 &4944735344554650084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4367660312361741320}
+  - component: {fileID: 2874799398866799284}
+  m_Layer: 0
+  m_Name: Projection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4367660312361741320
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4944735344554650084}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -1.07, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6682682384405896370}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &2874799398866799284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4944735344554650084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
+  m_Material: {fileID: 2100000, guid: 3ca4920f4008fad48b9bfa48de7a8a59, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.79
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_RenderingLayerMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ScaleMode: 0
+  m_Offset: {x: 0, y: 0, z: 6}
+  m_Size: {x: 2, y: 2, z: 15}
+  m_FadeFactor: 0.895
+  m_VisibleInScene: 1
+  version: 1
+  m_DecalLayerMask: 1
 --- !u!1 &5153998958188520702
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +441,7 @@ GameObject:
   - component: {fileID: 6554410128323757692}
   - component: {fileID: 1725572881263469909}
   - component: {fileID: 7515232431378634055}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5230,7 +5291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1401377644092969792}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5266,9 +5327,9 @@ GameObject:
   - component: {fileID: 9163638240039700954}
   - component: {fileID: 6747498064800547759}
   - component: {fileID: 127761011431184757}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TrigerringZone
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5400,7 +5461,7 @@ GameObject:
   - component: {fileID: 3336092081316535682}
   - component: {fileID: 9092228648272320287}
   - component: {fileID: 8079735819374370837}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Base_Character
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -5423,6 +5484,7 @@ Transform:
   - {fileID: 1144268862617776782}
   - {fileID: 6978024723729409707}
   - {fileID: 2750220527258448315}
+  - {fileID: 4367660312361741320}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6170067607375571798
@@ -5445,9 +5507,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1.5
+  m_Height: 2.1
   m_Direction: 1
-  m_Center: {x: 0, y: 1.25, z: 0}
+  m_Center: {x: 0, y: 2.03, z: 0}
 --- !u!114 &6381163332878485009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5461,9 +5523,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stepHeightRatio: 0.25
-  colliderHeight: 2
+  colliderHeight: 2.8
   colliderThickness: 1
-  colliderOffset: {x: 0, y: 0.5, z: 0}
+  colliderOffset: {x: 0, y: 0.6, z: 0}
   sensorType: 0
   isInDebugMode: 0
   sensorArrayRows: 1
@@ -5517,12 +5579,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMovementPreset: {fileID: 11400000, guid: c3e4a7b81d0f4ea8b25fd4ac74f2c611, type: 2}
   slipperySurfaceMovementPreset: {fileID: 11400000, guid: 6af1d2c4e98b4e3a91c7f0b25d6e4831, type: 2}
-  movementSpeed: 10
+  movementSpeed: 2
   acceleration: 30
   deceleration: 150
   airControlRate: 5
   jumpSpeed: 7
-  jumpDuration: 0.3
+  jumpDuration: 0.2
   jumpBufferDuration: 0.2
   coyoteTimeDuration: 0.25
   airFriction: 10
@@ -5562,7 +5624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ledgeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   requireLedgeMarker: 0
   forwardReference: {fileID: 1144268862617776782}
   maxUpwardSpeedToGrab: 2
@@ -5637,7 +5699,7 @@ MonoBehaviour:
   audioSource: {fileID: 8079735819374370837}
   useAnimationBasedFootsteps: 0
   landVelocityThreshold: 1
-  footstepDistance: 2
+  footstepDistance: 3.5
   audioClipVolume: 0.2
   randomPitchRange: 0.05
   relativeRandomizedVolumeRange: 0.2
@@ -5775,14 +5837,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1144268862617776782}
     m_Modifications:
+    - target: {fileID: 1484446630375200834, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087891188160651982, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2307331151715063083, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2307331151715063083, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2474182142358724712, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2488709466811912788, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2644676754404139480, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4592700161008391291, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6351959039962656266, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6367424076661139035, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 4108e62c14a726a42bf62697ca6aa277, type: 2}
+    - target: {fileID: 7314981952498763691, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7803673815469852577, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5822,6 +5920,10 @@ PrefabInstance:
     - target: {fileID: 7803673815469852577, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186807818642727584, guid: c85a1679dce45bf4ca68f949721c5a6c, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
