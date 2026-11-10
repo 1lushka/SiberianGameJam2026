@@ -16,7 +16,10 @@ namespace CMF
 
         public override float GetHorizontalMovementInput()
 		{
-			if(useRawInput)
+			if (MobileControls.Move.sqrMagnitude > 0f)
+                return MobileControls.Move.x;
+
+            if(useRawInput)
 				return Input.GetAxisRaw(horizontalInputAxis);
 			else
 				return Input.GetAxis(horizontalInputAxis);
@@ -24,7 +27,10 @@ namespace CMF
 
 		public override float GetVerticalMovementInput()
 		{
-			if(useRawInput)
+			if (MobileControls.Move.sqrMagnitude > 0f)
+                return MobileControls.Move.y;
+
+            if(useRawInput)
 				return Input.GetAxisRaw(verticalInputAxis);
 			else
 				return Input.GetAxis(verticalInputAxis);
@@ -32,7 +38,7 @@ namespace CMF
 
 		public override bool IsJumpKeyPressed()
 		{
-			return Input.GetKey(jumpKey);
+			return MobileControls.Jump || Input.GetKey(jumpKey);
 		}
     }
 }

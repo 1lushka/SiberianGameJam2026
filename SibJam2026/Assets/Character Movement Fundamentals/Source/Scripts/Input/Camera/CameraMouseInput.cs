@@ -22,6 +22,8 @@ namespace CMF
 
 	    public override float GetHorizontalCameraInput()
         {
+            if (MobileControls.SuppressMouse) return MobileControls.LookRate.x;
+
             //Get raw mouse input;
             float _input = Input.GetAxisRaw(mouseHorizontalAxis);
             
@@ -46,6 +48,8 @@ namespace CMF
 
         public override float GetVerticalCameraInput()
         {
+           if (MobileControls.SuppressMouse) return MobileControls.LookRate.y;
+
            //Get raw mouse input;
             float _input = -Input.GetAxisRaw(mouseVerticalAxis);
             

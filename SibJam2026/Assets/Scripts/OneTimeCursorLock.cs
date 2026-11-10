@@ -40,6 +40,12 @@ public class OneTimeCursorLock : MonoBehaviour
 
     public void ApplyCursorState()
     {
+        if (DevicePlatform.IsMobile)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            return;
+        }
         if (lockAndHideCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
