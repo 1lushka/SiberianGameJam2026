@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 public class CheckpointTrigger : MonoBehaviour
 {
     [SerializeField] private Transform respawnPoint; // если не задан, берётся сам объект
     [SerializeField] private Animator _penAnim;
+    static public Action StartTrigger;
+
     private void OnTriggerEnter(Collider other)
     {
         // Проверка: коллайдер принадлежит игроку?
@@ -17,6 +20,7 @@ public class CheckpointTrigger : MonoBehaviour
             Transform point = respawnPoint ? respawnPoint : transform;
             RespawnManager.Instance.SaveCheckpoint(point.position, point.rotation);
             if (_penAnim!=null) _penAnim.SetTrigger("Checkpoint");
+            StartTrigger?.Invoke();
         }
     }
 }
