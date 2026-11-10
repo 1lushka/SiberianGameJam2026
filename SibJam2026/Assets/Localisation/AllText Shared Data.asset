@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: AllText Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: AllText
+  m_TableCollectionNameGuidString: 885ea041febbf5b459ff90800798b6d9
+  m_Entries:
+  - m_Id: 594541072384
+    m_Key: FinalLevel+ART/Hud/CheckpointOrigin/CheckpointPanel_2/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1035228205056
+    m_Key: FinalLevel+ART/CanvasPauseMenu/Map/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1237372686336
+    m_Key: FinalLevel+ART/CanvasPauseMenu/ButtonBack (1)/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2666858598400
+    m_Key: Usual
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2832961425408
+    m_Key: StonedCoins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3810687242240
+    m_Key: Bouncy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4043445948416
+    m_Key: Ice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4162660651008
+    m_Key: Massive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5002632941568
+    m_Key: Cloud
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5221491724288
+    m_Key: UI_LevelSelect/CanvasLevelSelect/BG/Bubble/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19553172639744
+    m_Key: FinalLevel+ART/Hud/CheckpointOrigin/CheckpointPanel_1/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 3462580061630103844
+  references:
+    version: 2
+    RefIds:
+    - rid: 3462580061630103844
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1794330644373

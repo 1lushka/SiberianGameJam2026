@@ -12,5 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061ba789d8782f841ad17f1ec9404820, type: 3}
   m_Name: Simple
   m_EditorClassIdentifier: Assembly-CSharp::LevelSelectButtonData
-  displayName: "\u041E\u0431\u044B\u0447\u043D\u044B\u0439"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: GUID:885ea041febbf5b459ff90800798b6d9
+    m_TableEntryReference:
+      m_KeyId: 2666858598400
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   requiredCompletedLevels: 0
+  references:
+    version: 2
+    RefIds: []

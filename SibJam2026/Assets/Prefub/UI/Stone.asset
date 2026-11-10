@@ -12,5 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061ba789d8782f841ad17f1ec9404820, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: Assembly-CSharp::LevelSelectButtonData
-  displayName: "\u0412\u0441\u0435 \u043C\u043E\u043D\u0435\u0442\u044B \u2014 \u0442\u044F\u0436\u0451\u043B\u044B\u0435"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: GUID:885ea041febbf5b459ff90800798b6d9
+    m_TableEntryReference:
+      m_KeyId: 2832961425408
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   requiredCompletedLevels: 1
+  references:
+    version: 2
+    RefIds: []

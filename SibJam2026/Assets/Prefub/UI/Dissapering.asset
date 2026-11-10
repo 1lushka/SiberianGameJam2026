@@ -12,6 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061ba789d8782f841ad17f1ec9404820, type: 3}
   m_Name: Dissapering
   m_EditorClassIdentifier: Assembly-CSharp::LevelSelectButtonData
-  displayName: "\u0417\u0435\u043C\u043B\u044F  \u2014 \u043F\u0443\u0448\u0438\u0441\u0442\u0430\u044F,
-    \u043A\u0430\u043A \u043E\u0431\u043B\u0430\u0447\u043A\u043E"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: GUID:885ea041febbf5b459ff90800798b6d9
+    m_TableEntryReference:
+      m_KeyId: 5002632941568
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   requiredCompletedLevels: 3
+  references:
+    version: 2
+    RefIds: []

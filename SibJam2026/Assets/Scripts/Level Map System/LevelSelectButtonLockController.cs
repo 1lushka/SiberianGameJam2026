@@ -127,8 +127,8 @@ public class LevelSelectButtonLockController : MonoBehaviour
 
     private void ApplyStaticText()
     {
-        if (titleText != null && buttonData != null && !string.IsNullOrWhiteSpace(buttonData.displayName))
-            titleText.text = buttonData.displayName;
+        if (titleText != null && buttonData != null && !string.IsNullOrWhiteSpace(buttonData.displayName.GetLocalizedString()))
+            titleText.text = buttonData.displayName.GetLocalizedString(); ;
     }
 
     private void ApplyButtonColor(bool isCompleted)

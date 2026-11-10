@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: AllText_en-US
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: 885ea041febbf5b459ff90800798b6d9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 594541072384
+    m_Localized: CHECKPOINT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1035228205056
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1237372686336
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2666858598400
+    m_Localized: Usual
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2832961425408
+    m_Localized: All coins made of stone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3810687242240
+    m_Localized: All objects are bouncy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4043445948416
+    m_Localized: All objects made from ice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4162660651008
+    m_Localized: Mountains are extremely massive.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5002632941568
+    m_Localized: All objects made frome cloud
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5221491724288
+    m_Localized: Let's see, how you'll handle this
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19553172639744
+    m_Localized: CHECKPOINT
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

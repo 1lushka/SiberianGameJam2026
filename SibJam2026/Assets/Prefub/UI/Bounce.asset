@@ -12,6 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061ba789d8782f841ad17f1ec9404820, type: 3}
   m_Name: Bounce
   m_EditorClassIdentifier: Assembly-CSharp::LevelSelectButtonData
-  displayName: "\u0412\u0441\u0435 \u043E\u0431\u044A\u0435\u043A\u0442\u044B \u2014
-    \u0443\u043F\u0440\u0443\u0433\u0438\u0435"
+  displayName:
+    m_TableReference:
+      m_TableCollectionName: GUID:885ea041febbf5b459ff90800798b6d9
+    m_TableEntryReference:
+      m_KeyId: 3810687242240
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   requiredCompletedLevels: 1
+  references:
+    version: 2
+    RefIds: []
