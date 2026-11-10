@@ -138,6 +138,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5594831778871327347}
     m_Modifications:
+    - target: {fileID: 2212881550823918420, guid: a9f65043e5de92240a704bb67a740855, type: 3}
+      propertyPath: 'propertyMaterials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c1ec8a77980bbfb4a9df7b864edfc6c8, type: 2}
     - target: {fileID: 3356481201122015850, guid: a9f65043e5de92240a704bb67a740855, type: 3}
       propertyPath: m_Name
       value: Coin
@@ -145,6 +149,10 @@ PrefabInstance:
     - target: {fileID: 3356481201122015850, guid: a9f65043e5de92240a704bb67a740855, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356481201122015850, guid: a9f65043e5de92240a704bb67a740855, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6149633266474336725, guid: a9f65043e5de92240a704bb67a740855, type: 3}
       propertyPath: m_LocalPosition.x
@@ -190,9 +198,21 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 2ac6f68da76a4114db077f6e773f7c46, type: 2}
+    - target: {fileID: 7781365945521733601, guid: a9f65043e5de92240a704bb67a740855, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2ac6f68da76a4114db077f6e773f7c46, type: 2}
+    - target: {fileID: 8141394774873300532, guid: a9f65043e5de92240a704bb67a740855, type: 3}
+      propertyPath: m_TagString
+      value: Coin
+      objectReference: {fileID: 0}
     - target: {fileID: 9040881022503130841, guid: a9f65043e5de92240a704bb67a740855, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9040881022503130841, guid: a9f65043e5de92240a704bb67a740855, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9040881022503130841, guid: a9f65043e5de92240a704bb67a740855, type: 3}
       propertyPath: m_TagString
